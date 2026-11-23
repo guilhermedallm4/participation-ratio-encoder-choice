@@ -1,76 +1,85 @@
-# A razão de participação sinaliza algumas representações degeneradas, mas não ordena com segurança extratores sadios
+# Participation ratio flags some degenerate representations, but does not reliably rank healthy encoders
 
-Código, resultados e fonte do artigo submetido ao **ESANN**.
+Code, results and LaTeX source for a paper submitted to **ESANN**.
 
-A geometria da representação congelada costuma ser apresentada como uma forma
-de escolher um extrator sem usar rótulos, com base na premissa de que uma
-medida correlacionada com a acurácia final também serviria para ordenar
-candidatos. Este trabalho testa essa premissa em dezessete extratores
-congelados avaliados em quatro domínios.
+The geometry of a frozen representation is often offered as a label-free way to
+pick an encoder, on the premise that a measure correlated with downstream
+accuracy can rank candidates. This work tests that premise on seventeen frozen
+encoders across four domains.
 
-**Resultado principal.** A razão de participação se correlaciona com a acurácia
-de uma sonda linear (ρ = 0,41, p = 0,007), mas a correlação vem dos checkpoints
-de dimensionalidade extrema: cai para 0,27 sem o MAE, para 0,21 sem também os
-dois CLIP, e fica em 0,11 entre as nove arquiteturas. Um checkpoint retido, com
-a predição registrada antes da medição, mostra onde a premissa falha: o BEiT-3
-está entre os piores dos dezoito na sonda, mas a razão só o sinaliza em um dos
-quatro domínios.
+**Main result.** The participation ratio does correlate with linear-probe
+accuracy (ρ = 0.41, p = 0.007), but the correlation comes from the checkpoints
+of extreme dimensionality: it drops to 0.27 without MAE, to 0.21 without the
+two CLIP as well, and sits at 0.11 across the nine architectures. A held-out
+checkpoint, with the prediction registered before measurement, shows where the
+premise fails: BEiT-3 ranks among the worst of eighteen on the probe, yet the
+ratio flags it in only one of the four domains.
 
-## Organização
+## Layout
 
-| diretório | conteúdo |
+| directory | contents |
 |---|---|
-| `codigo/` | medidas geométricas, sonda linear, inferência e figuras |
-| `artigo/` | fonte LaTeX (pt e en), classe ESANN, figuras e relatórios |
-| `resultados/` | saídas agregadas em JSON, CSV e Markdown |
-| `figuras/` | figuras de diagnóstico que não entraram no artigo |
-| `logs/` | log das execuções, para rastreabilidade |
+| `codigo/` | geometric measures, linear probe, inference and figures |
+| `artigo/` | LaTeX source (Portuguese and English), ESANN class, figures, reports |
+| `resultados/` | aggregated output as JSON, CSV and Markdown |
+| `figuras/` | diagnostic figures that did not make it into the paper |
+| `logs/` | run logs, kept for traceability |
 
-### Pontos de entrada
+Code, file names and comments are in Portuguese, which is the working language
+of the project. The paper itself is available in both languages
+(`artigo/artigo-en.tex` and `artigo/artigo-pt.tex`); the English one is the
+submission.
 
-- `executar_tudo.sh` — pipeline completo, retomável
-- `codigo/baixa_bancos.py` — reconstrói a amostra de imagens
-- `codigo/testes.py` — razão de participação, campo receptivo, fluxo residual
-- `codigo/sonda.py` — sonda linear, 5 dobras externas, 3 partições
-- `codigo/analise_final.py` — correlações e permutação no nível do extrator
-- `codigo/parcial_fl.py` — correlação parcial com inferência de Freedman–Lane
-- `codigo/segundo_colapso.py` — teste com os extratores retidos
+### Entry points
 
-### Resultados que sustentam afirmações do artigo
-
-| arquivo | afirmação |
+| script | what it does |
 |---|---|
-| `resultados/NUMEROS.md` | tabela completa por checkpoint |
-| `resultados/PREDICAO_REGISTRADA.md` | **registro prévio** da predição do teste retido, com a regra de sinalização e os horários dos arquivos |
-| `resultados/SEGUNDO_COLAPSO.md` | resultado do teste com extratores retidos |
-| `resultados/PARCIAL_FL.md` | correlação parcial por Freedman–Lane |
-| `resultados/ESTABILIDADE.md` | estabilidade da razão em 50, 100, 150 e 200 imagens |
-| `resultados/INFERENCIA.md` | permutação, jackknife e intervalos |
+| `executar_tudo.sh` | full pipeline, resumable |
+| `codigo/baixa_bancos.py` | rebuilds the image sample |
+| `codigo/testes.py` | participation ratio, receptive field, residual flow |
+| `codigo/sonda.py` | linear probe, 5 outer folds, 3 partitions |
+| `codigo/analise_final.py` | correlations and encoder-level permutation |
+| `codigo/parcial_fl.py` | partial correlation with Freedman–Lane inference |
+| `codigo/segundo_colapso.py` | held-out encoder test |
 
-## Dados: o que não está aqui, e por quê
+### Results backing each claim
 
-O diretório `data/` **não é versionado**.
+| file | claim |
+|---|---|
+| `resultados/NUMEROS.md` | full per-checkpoint table |
+| `resultados/PREDICAO_REGISTRADA.md` | **pre-registration** of the held-out prediction, with the flag rule and file timestamps |
+| `resultados/SEGUNDO_COLAPSO.md` | result of the held-out encoder test |
+| `resultados/PARCIAL_FL.md` | partial correlation under Freedman–Lane |
+| `resultados/ESTABILIDADE.md` | stability of the ratio at 50, 100, 150 and 200 images |
+| `resultados/INFERENCIA.md` | permutation, jackknife and intervals |
 
-- **Mamografia (INbreast).** O banco só pode ser obtido mediante cadastro junto
-  aos autores e não pode ser redistribuído. A planilha original do INbreast
-  contém identificação de paciente não anonimizada; nada derivado dela que
-  permita reidentificação está neste repositório. Os rótulos de classe e o
-  agrupamento por paciente usados pela sonda são lidos de um arquivo local,
-  fora deste repositório (ver `codigo/sonda.py`).
-- **DTD, Pet e SUN397.** Bancos públicos com licença própria, não
-  redistribuídos aqui.
-- **`resultados/pr_vetores/`.** Vetores de características, 39 MB, dos quais 17
-  arquivos derivam das mamografias. Ficam de fora por precaução.
+These reports are generated by the scripts and are written in Portuguese; the
+tables and numbers in them are self-explanatory.
 
-Para reconstruir a amostra, use `codigo/baixa_bancos.py`, que sorteia as
-imagens em rodízio entre as classes com semente fixa. A mamografia exige o
-INbreast já obtido junto aos autores.
+## Data: what is not here, and why
 
-## Ambiente
+The `data/` directory is **not tracked**.
 
-Python com PyTorch, `timm`, scikit-learn, SciPy, NumPy, pandas e matplotlib.
-Os identificadores exatos dos checkpoints estão em `codigo/multitarefa.py`.
+- **Mammography (INbreast).** The dataset is only available after registering
+  with its authors and may not be redistributed. The original INbreast
+  spreadsheet contains non-anonymised patient identifiers; nothing derived from
+  it that would allow re-identification is in this repository. The class labels
+  and the per-patient grouping used by the probe are read from a local file
+  outside this repository (see `codigo/sonda.py`).
+- **DTD, Pet and SUN397.** Public datasets under their own licences, not
+  redistributed here.
+- **`resultados/pr_vetores/`.** Feature vectors, 39 MB, of which 17 files are
+  derived from the mammograms. Left out as a precaution.
 
-## Citação
+To rebuild the sample, use `codigo/baixa_bancos.py`, which draws images
+round-robin across classes under a fixed seed. Mammography requires INbreast
+already obtained from its authors.
 
-Em avaliação. Até a publicação, cite este repositório.
+## Environment
+
+Python with PyTorch, `timm`, scikit-learn, SciPy, NumPy, pandas and matplotlib.
+Exact checkpoint identifiers are in `codigo/multitarefa.py`.
+
+## Citation
+
+Under review. Until publication, please cite this repository.

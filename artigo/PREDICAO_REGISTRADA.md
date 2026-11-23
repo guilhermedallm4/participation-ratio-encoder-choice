@@ -1,52 +1,53 @@
-# Registro prévio da predição — teste dos extratores retidos
+# Pre-registration of the held-out encoder prediction
 
-Este arquivo existe para que a predição do teste de §3.2 seja **auditável**, e
-não apenas afirmada no texto. O parecer pediu exatamente isso.
+This file exists so that the prediction behind the test in Section 3.2 of the
+paper is **auditable**, rather than merely asserted. A reviewer asked for
+exactly this.
 
-## Evidência de que a predição antecede a medição
+## Evidence that the prediction precedes the measurement
 
-| arquivo | conteúdo | modificado em |
+| file | contents | last modified |
 |---|---|---|
-| `codigo/segundo_colapso.py` | a predição, no *docstring* do módulo | **2026-11-05 15:12:37 −03** |
-| `resultados/segundo_colapso.json` | a primeira medição gravada | 2026-11-05 16:55:50 −03 |
-| `resultados/log_segundo.txt` | o log da execução | (mesma execução) |
+| `codigo/segundo_colapso.py` | the prediction, in the module docstring | **2026-11-05 15:12:37 −03** |
+| `resultados/segundo_colapso.json` | the first recorded measurement | 2026-11-05 16:55:50 −03 |
+| `resultados/log_segundo.txt` | the run log | (same run) |
 
-O script que contém a predição é 1 h 43 min anterior ao primeiro resultado
-gravado. Nenhum dos dois extratores retidos aparece em `testes.json` ou em
-`sonda.json`, os arquivos de onde saem os dezessete do artigo.
+The script holding the prediction is 1 h 43 min older than the first recorded
+result. Neither held-out encoder appears in `testes.json` or `sonda.json`, the
+files the paper's seventeen encoders come from.
 
-## A predição, copiada literalmente do docstring
+## The prediction, quoted verbatim from the docstring
 
-> `vit_b16_beit3`      BEiT-3 base, checkpoint ".pt": modelagem mascarada PURA,
-> sem o ajuste fino que os demais beit do timm carregam.
-> Mesma arquitetura, mesmas 1025 fichas a 512 px.
-> **PREDICAO: razao de participacao na faixa do MAE (2-5) e
-> sonda entre as piores do conjunto.**
+> `vit_b16_beit3`      BEiT-3 base, ".pt" checkpoint: PURE masked modelling,
+> without the fine-tuning the other timm beit checkpoints carry.
+> Same architecture, same 1025 tokens at 512 px.
+> **PREDICTION: participation ratio in MAE's range (2-5) and
+> probe among the worst in the set.**
 >
-> `vit_b16_aleatorio`  ViT-B/16 sem treino nenhum. NAO e candidato a colapso: e
-> o referencial de "representacao que se deve rejeitar",
-> com resposta conhecida na sonda. Se a razao NAO o
-> sinalizar, a afirmacao fica delimitada -- ela flagra
-> colapso de modelagem mascarada, nao representacao ruim em
-> geral. Interessa nos dois sentidos.
+> `vit_b16_aleatorio`  ViT-B/16 with no training at all. NOT a collapse
+> candidate: it is the reference point for "a representation
+> one should reject", with a known probe outcome. If the ratio
+> does NOT flag it, the claim is bounded -- it flags masked-modelling
+> collapse, not poor representations in general.
+> Informative either way.
 
-## Resultado, contra a predição
+## Outcome, against the prediction
 
-A predição para o BEiT-3 **falhou em três dos quatro domínios**: a razão de
-participação ficou em 17,7–22,8 em DTD, Pet e SUN397, fora da faixa 2–5
-predita, enquanto a sonda ficou entre as piores, como predito. Só na mamografia
-(2,24) a predição se cumpriu nas duas metades.
+The prediction for BEiT-3 **failed in three of the four domains**: the
+participation ratio came out at 17.7–22.8 on DTD, Pet and SUN397, outside the
+predicted 2–5 range, while the probe landed among the worst, as predicted. Only
+on mammography (2.24) did both halves of the prediction hold.
 
-A predição para o ViT-B/16 sem treino cumpriu-se nos quatro domínios.
+The prediction for the untrained ViT-B/16 held in all four domains.
 
-## Regra operacional de sinalização
+## Operational flag rule
 
-Um extrator é **sinalizado** num domínio quando sua razão de participação,
-medida pelo mesmo protocolo (`ic_sub`, $m = 100$ sobre 200 imagens), fica
-**abaixo do menor valor observado entre os extratores de referência não
-colapsados naquele domínio** — isto é, abaixo do mínimo dos dezessete excluído
-o MAE: 4,93 na mamografia, 9,78 no DTD, 11,35 no Pet e 10,43 no SUN397.
+An encoder is **flagged** in a domain when its participation ratio, measured by
+the same protocol (`ic_sub`, $m = 100$ over 200 images), falls **below the
+lowest value among the non-collapsed reference encoders in that domain** — that
+is, below the minimum over the seventeen excluding MAE: 4.93 on mammography,
+9.78 on DTD, 11.35 on Pet and 10.43 on SUN397.
 
-A regra é avaliada domínio a domínio. "Colapso" é, portanto, uma propriedade
-operacional da geometria medida **naquele domínio**, não uma propriedade
-intrínseca e global do checkpoint.
+The rule is evaluated domain by domain. "Collapse" is therefore an operational
+property of the geometry measured **in that domain**, not an intrinsic,
+global property of the checkpoint.

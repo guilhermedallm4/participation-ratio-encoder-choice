@@ -1,18 +1,18 @@
 # ---------------------------------------------------------------------------
-# DADOS DE IMAGEM -- NUNCA VERSIONAR
+# IMAGE DATA -- NEVER COMMIT
 # ---------------------------------------------------------------------------
-# data/amostras/mamografia contem imagens do INbreast, que so pode ser obtido
-# mediante cadastro junto aos autores do banco e nao pode ser redistribuido.
-# Os demais bancos (DTD, Pet, SUN397) tem licenca propria e tambem nao sao
-# redistribuidos aqui. Use codigo/baixa_bancos.py para reconstruir a amostra.
+# data/amostras/mamografia holds INbreast images, which are only available
+# after registering with the dataset authors and may not be redistributed.
+# The other datasets (DTD, Pet, SUN397) have their own licences and are not
+# redistributed here either. Use codigo/baixa_bancos.py to rebuild the sample.
 data/
 
-# Vetores de caracteristicas (39 MB). 17 deles derivam das mamografias, e
-# embeddings de imagem medica sao dado derivado de paciente identificavel.
+# Feature vectors (39 MB). Seventeen of them derive from the mammograms, and
+# embeddings of medical images are data derived from identifiable patients.
 resultados/pr_vetores/
 
 # ---------------------------------------------------------------------------
-# Artefatos
+# Build artefacts
 # ---------------------------------------------------------------------------
 __pycache__/
 *.pyc
