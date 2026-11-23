@@ -1,0 +1,11 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  vit_b16_beit3      mamografia  PR=  2.24 [2.10;2.39]  sonda=0.577 [0.516;0.650] (AUC)  [17s]
+  vit_b16_beit3      dtd         PR= 22.83 [20.96;24.74]  sonda=0.419 [0.367;0.468] (acurácia)  [256s]
+  vit_b16_beit3      pet         PR= 20.36 [18.54;22.19]  sonda=0.427 [0.377;0.483] (acurácia)  [278s]
+  vit_b16_beit3      sun397      PR= 17.69 [15.96;19.56]  sonda=0.771 [0.727;0.818] (acurácia)  [229s]
+  vit_b16_aleatorio  mamografia  PR=  1.27 [1.23;1.31]  sonda=0.499 [0.437;0.567] (AUC)  [13s]
+  vit_b16_aleatorio  dtd         PR=  1.55 [1.46;1.64]  sonda=0.075 [0.049;0.103] (acurácia)  [1907s]
+  vit_b16_aleatorio  pet         PR=  1.67 [1.57;1.78]  sonda=0.060 [0.036;0.088] (acurácia)  [1691s]
+  vit_b16_aleatorio  sun397      PR=  1.64 [1.56;1.73]  sonda=0.191 [0.148;0.232] (acurácia)  [1798s]
+
+-> /home/guilhermelima/quantico/explicabilidade/resultados/segundo_colapso.json

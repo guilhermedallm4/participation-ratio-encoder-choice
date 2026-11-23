@@ -1,0 +1,159 @@
+
+======================================================================
+BANCO: mamografia
+======================================================================
+
+1. CAMPO RECEPTIVO EFETIVO
+   resnet50   conv residual            n=16  raio50   3.8-> 70.6 px
+   maxvit_t   conv (MBConv)            n=11  raio50   4.3->106.2 px
+   maxvit_t   atencao janela 7x7       n=11  raio50   4.5->106.6 px
+   maxvit_t   atencao em grade         n=11  raio50   7.4->108.2 px
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+   vit_b16    atencao global + MLP     n=12  raio50  19.1->156.8 px
+
+2. EMBARALHAMENTO DE RETALHOS
+   resnet50   g= 4 (128 px) global  delta 0.560  CKA 0.883
+   resnet50   g= 4 (128 px) local   delta 0.530  CKA 0.908
+   resnet50   g= 8 ( 64 px) global  delta 0.870  CKA 0.840
+   resnet50   g= 8 ( 64 px) local   delta 0.566  CKA 0.899
+   resnet50   g=16 ( 32 px) global  delta 1.052  CKA 0.749
+   resnet50   g=16 ( 32 px) local   delta 0.541  CKA 0.849
+   resnet50   g=32 ( 16 px) global  delta 1.246  CKA 0.520
+   resnet50   g=32 ( 16 px) local   delta 0.645  CKA 0.702
+   maxvit_t   g= 4 (128 px) global  delta 0.516  CKA 0.596
+   maxvit_t   g= 4 (128 px) local   delta 0.448  CKA 0.677
+   maxvit_t   g= 8 ( 64 px) global  delta 0.648  CKA 0.475
+   maxvit_t   g= 8 ( 64 px) local   delta 0.548  CKA 0.569
+   maxvit_t   g=16 ( 32 px) global  delta 0.803  CKA 0.379
+   maxvit_t   g=16 ( 32 px) local   delta 0.621  CKA 0.489
+   maxvit_t   g=32 ( 16 px) global  delta 0.826  CKA 0.192
+   maxvit_t   g=32 ( 16 px) local   delta 0.637  CKA 0.569
+   vit_b16    g= 4 (128 px) global  delta 0.645  CKA 0.669
+   vit_b16    g= 4 (128 px) local   delta 0.519  CKA 0.746
+   vit_b16    g= 8 ( 64 px) global  delta 0.766  CKA 0.550
+   vit_b16    g= 8 ( 64 px) local   delta 0.532  CKA 0.785
+   vit_b16    g=16 ( 32 px) global  delta 0.865  CKA 0.469
+   vit_b16    g=16 ( 32 px) local   delta 0.390  CKA 0.879
+   vit_b16    g=32 ( 16 px) global  delta 0.909  CKA 0.450
+   vit_b16    g=32 ( 16 px) local   delta 0.200  CKA 0.964
+
+-> parcial gravado
+
+======================================================================
+BANCO: dtd
+======================================================================
+
+1. CAMPO RECEPTIVO EFETIVO
+   resnet50   conv residual            n=16  raio50   3.5-> 78.5 px
+   maxvit_t   conv (MBConv)            n=11  raio50   4.3->125.1 px
+   maxvit_t   atencao janela 7x7       n=11  raio50   4.9->125.0 px
+   maxvit_t   atencao em grade         n=11  raio50   7.1->128.1 px
+   vit_b16    atencao global + MLP     n=12  raio50  18.5->177.1 px
+
+2. EMBARALHAMENTO DE RETALHOS
+   resnet50   g= 4 (128 px) global  delta 0.442  CKA 0.949
+   resnet50   g= 4 (128 px) local   delta 0.358  CKA 0.960
+   resnet50   g= 8 ( 64 px) global  delta 0.645  CKA 0.896
+   resnet50   g= 8 ( 64 px) local   delta 0.489  CKA 0.931
+   resnet50   g=16 ( 32 px) global  delta 0.798  CKA 0.828
+   resnet50   g=16 ( 32 px) local   delta 0.594  CKA 0.891
+   resnet50   g=32 ( 16 px) global  delta 1.085  CKA 0.615
+   resnet50   g=32 ( 16 px) local   delta 0.810  CKA 0.777
+   maxvit_t   g= 4 (128 px) global  delta 0.320  CKA 0.755
+   maxvit_t   g= 4 (128 px) local   delta 0.270  CKA 0.801
+   maxvit_t   g= 8 ( 64 px) global  delta 0.437  CKA 0.555
+   maxvit_t   g= 8 ( 64 px) local   delta 0.331  CKA 0.745
+   maxvit_t   g=16 ( 32 px) global  delta 0.532  CKA 0.478
+   maxvit_t   g=16 ( 32 px) local   delta 0.429  CKA 0.573
+   maxvit_t   g=32 ( 16 px) global  delta 0.651  CKA 0.226
+   maxvit_t   g=32 ( 16 px) local   delta 0.510  CKA 0.495
+   vit_b16    g= 4 (128 px) global  delta 0.497  CKA 0.911
+   vit_b16    g= 4 (128 px) local   delta 0.382  CKA 0.943
+   vit_b16    g= 8 ( 64 px) global  delta 0.607  CKA 0.873
+   vit_b16    g= 8 ( 64 px) local   delta 0.370  CKA 0.951
+   vit_b16    g=16 ( 32 px) global  delta 0.695  CKA 0.831
+   vit_b16    g=16 ( 32 px) local   delta 0.301  CKA 0.967
+   vit_b16    g=32 ( 16 px) global  delta 0.725  CKA 0.818
+   vit_b16    g=32 ( 16 px) local   delta 0.152  CKA 0.991
+
+-> parcial gravado
+
+======================================================================
+BANCO: pet
+======================================================================
+
+1. CAMPO RECEPTIVO EFETIVO
+   resnet50   conv residual            n=16  raio50   3.8-> 71.1 px
+   maxvit_t   conv (MBConv)            n=11  raio50   4.3->156.6 px
+   maxvit_t   atencao janela 7x7       n=11  raio50   4.7->156.6 px
+   maxvit_t   atencao em grade         n=11  raio50  11.4->156.9 px
+   vit_b16    atencao global + MLP     n=12  raio50  18.5->200.5 px
+
+2. EMBARALHAMENTO DE RETALHOS
+   resnet50   g= 4 (128 px) global  delta 1.059  CKA 0.906
+   resnet50   g= 4 (128 px) local   delta 0.906  CKA 0.912
+   resnet50   g= 8 ( 64 px) global  delta 1.459  CKA 0.837
+   resnet50   g= 8 ( 64 px) local   delta 1.013  CKA 0.877
+   resnet50   g=16 ( 32 px) global  delta 1.578  CKA 0.743
+   resnet50   g=16 ( 32 px) local   delta 0.856  CKA 0.867
+   resnet50   g=32 ( 16 px) global  delta 1.727  CKA 0.482
+   resnet50   g=32 ( 16 px) local   delta 0.963  CKA 0.764
+   maxvit_t   g= 4 (128 px) global  delta 0.359  CKA 0.668
+   maxvit_t   g= 4 (128 px) local   delta 0.328  CKA 0.651
+   maxvit_t   g= 8 ( 64 px) global  delta 0.560  CKA 0.557
+   maxvit_t   g= 8 ( 64 px) local   delta 0.364  CKA 0.686
+   maxvit_t   g=16 ( 32 px) global  delta 0.736  CKA 0.373
+   maxvit_t   g=16 ( 32 px) local   delta 0.372  CKA 0.672
+   maxvit_t   g=32 ( 16 px) global  delta 0.688  CKA 0.243
+   maxvit_t   g=32 ( 16 px) local   delta 0.444  CKA 0.547
+   vit_b16    g= 4 (128 px) global  delta 0.790  CKA 0.775
+   vit_b16    g= 4 (128 px) local   delta 0.608  CKA 0.849
+   vit_b16    g= 8 ( 64 px) global  delta 1.003  CKA 0.646
+   vit_b16    g= 8 ( 64 px) local   delta 0.594  CKA 0.852
+   vit_b16    g=16 ( 32 px) global  delta 1.109  CKA 0.563
+   vit_b16    g=16 ( 32 px) local   delta 0.393  CKA 0.934
+   vit_b16    g=32 ( 16 px) global  delta 1.138  CKA 0.531
+   vit_b16    g=32 ( 16 px) local   delta 0.185  CKA 0.987
+
+-> parcial gravado
+
+======================================================================
+BANCO: sun397
+======================================================================
+
+1. CAMPO RECEPTIVO EFETIVO
+   resnet50   conv residual            n=16  raio50   3.8-> 71.8 px
+   maxvit_t   conv (MBConv)            n=11  raio50   4.3->156.6 px
+   maxvit_t   atencao janela 7x7       n=11  raio50   4.7->157.6 px
+   maxvit_t   atencao em grade         n=11  raio50  15.2->158.6 px
+   vit_b16    atencao global + MLP     n=12  raio50  18.7->195.6 px
+
+2. EMBARALHAMENTO DE RETALHOS
+   resnet50   g= 4 (128 px) global  delta 0.743  CKA 0.975
+   resnet50   g= 4 (128 px) local   delta 0.637  CKA 0.979
+   resnet50   g= 8 ( 64 px) global  delta 1.058  CKA 0.937
+   resnet50   g= 8 ( 64 px) local   delta 0.743  CKA 0.956
+   resnet50   g=16 ( 32 px) global  delta 1.083  CKA 0.897
+   resnet50   g=16 ( 32 px) local   delta 0.679  CKA 0.938
+   resnet50   g=32 ( 16 px) global  delta 1.348  CKA 0.702
+   resnet50   g=32 ( 16 px) local   delta 0.783  CKA 0.851
+   maxvit_t   g= 4 (128 px) global  delta 0.407  CKA 0.740
+   maxvit_t   g= 4 (128 px) local   delta 0.331  CKA 0.781
+   maxvit_t   g= 8 ( 64 px) global  delta 0.550  CKA 0.521
+   maxvit_t   g= 8 ( 64 px) local   delta 0.405  CKA 0.703
+   maxvit_t   g=16 ( 32 px) global  delta 0.723  CKA 0.308
+   maxvit_t   g=16 ( 32 px) local   delta 0.480  CKA 0.604
+   maxvit_t   g=32 ( 16 px) global  delta 0.822  CKA 0.307
+   maxvit_t   g=32 ( 16 px) local   delta 0.569  CKA 0.532
+   vit_b16    g= 4 (128 px) global  delta 0.728  CKA 0.836
+   vit_b16    g= 4 (128 px) local   delta 0.528  CKA 0.921
+   vit_b16    g= 8 ( 64 px) global  delta 0.932  CKA 0.749
+   vit_b16    g= 8 ( 64 px) local   delta 0.496  CKA 0.928
+   vit_b16    g=16 ( 32 px) global  delta 1.081  CKA 0.663
+   vit_b16    g=16 ( 32 px) local   delta 0.359  CKA 0.961
+   vit_b16    g=32 ( 16 px) global  delta 1.132  CKA 0.643
+   vit_b16    g=32 ( 16 px) local   delta 0.166  CKA 0.994
+
+-> parcial gravado
+
+concluido

@@ -1,0 +1,78 @@
+
+== 6. FLUXO RESIDUAL COM INTERVALO ==
+  -- mamografia --
+   resnet50    conv residual            ramo 1.668 [1.664;1.672]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+   maxvit_t    atencao janela 7x7       ramo 0.377 [0.376;0.379]
+   maxvit_t    atencao em grade         ramo 0.440 [0.439;0.442]
+   maxvit_t    conv (MBConv)            ramo 0.293 [0.291;0.294]
+   vit_b16     atencao global + MLP     ramo 0.815 [0.812;0.817]
+-> fluxo gravado
+  -- dtd --
+   resnet50    conv residual            ramo 1.676 [1.648;1.705]
+   maxvit_t    atencao janela 7x7       ramo 0.363 [0.359;0.366]
+   maxvit_t    atencao em grade         ramo 0.423 [0.419;0.427]
+   maxvit_t    conv (MBConv)            ramo 0.330 [0.326;0.333]
+   vit_b16     atencao global + MLP     ramo 0.812 [0.801;0.823]
+-> fluxo gravado
+  -- pet --
+   resnet50    conv residual            ramo 1.702 [1.686;1.714]
+   maxvit_t    atencao janela 7x7       ramo 0.360 [0.358;0.362]
+   maxvit_t    atencao em grade         ramo 0.406 [0.404;0.409]
+   maxvit_t    conv (MBConv)            ramo 0.333 [0.331;0.336]
+   vit_b16     atencao global + MLP     ramo 0.821 [0.815;0.826]
+-> fluxo gravado
+  -- sun397 --
+   resnet50    conv residual            ramo 1.623 [1.609;1.636]
+   maxvit_t    atencao janela 7x7       ramo 0.356 [0.353;0.358]
+   maxvit_t    atencao em grade         ramo 0.409 [0.406;0.412]
+   maxvit_t    conv (MBConv)            ramo 0.339 [0.335;0.343]
+   vit_b16     atencao global + MLP     ramo 0.811 [0.805;0.818]
+-> fluxo gravado
+
+== 7. CONTROLE DE ALINHAMENTO DA GRADE ==
+  -- mamografia --
+   resnet50    mamografia  desloc  0 px  arranjo +0.601 [+0.587;+0.617]
+   resnet50    mamografia  desloc  8 px  arranjo +0.572 [+0.559;+0.589]
+   maxvit_t    mamografia  desloc  0 px  arranjo +0.190 [+0.175;+0.207]
+   maxvit_t    mamografia  desloc  8 px  arranjo +0.210 [+0.191;+0.233]
+   vit_b16     mamografia  desloc  0 px  arranjo +0.708 [+0.695;+0.720]
+   vit_b16     mamografia  desloc  8 px  arranjo +0.180 [+0.169;+0.192]
+   convnext_t  mamografia  desloc  0 px  arranjo +0.352 [+0.337;+0.368]
+   convnext_t  mamografia  desloc  8 px  arranjo +0.286 [+0.267;+0.305]
+   swin_t      mamografia  desloc  0 px  arranjo +0.856 [+0.838;+0.879]
+   swin_t      mamografia  desloc  8 px  arranjo +0.834 [+0.816;+0.855]
+   vit_s16     mamografia  desloc  0 px  arranjo +0.991 [+0.983;+1.002]
+   vit_s16     mamografia  desloc  8 px  arranjo +0.582 [+0.567;+0.597]
+-> alinhamento gravado
+  -- pet --
+   resnet50    pet         desloc  0 px  arranjo +0.763 [+0.717;+0.808]
+   resnet50    pet         desloc  8 px  arranjo +0.705 [+0.663;+0.747]
+   maxvit_t    pet         desloc  0 px  arranjo +0.244 [+0.220;+0.275]
+   maxvit_t    pet         desloc  8 px  arranjo +0.213 [+0.183;+0.243]
+   vit_b16     pet         desloc  0 px  arranjo +0.953 [+0.931;+0.977]
+   vit_b16     pet         desloc  8 px  arranjo +0.335 [+0.308;+0.358]
+   convnext_t  pet         desloc  0 px  arranjo +0.540 [+0.507;+0.574]
+   convnext_t  pet         desloc  8 px  arranjo +0.481 [+0.451;+0.512]
+   swin_t      pet         desloc  0 px  arranjo +0.901 [+0.863;+0.945]
+   swin_t      pet         desloc  8 px  arranjo +0.800 [+0.766;+0.835]
+   vit_s16     pet         desloc  0 px  arranjo +1.067 [+1.046;+1.089]
+   vit_s16     pet         desloc  8 px  arranjo +0.429 [+0.407;+0.452]
+-> alinhamento gravado
+
+== 5. ABLACAO DA ATENCAO EM GRADE DO MAXVIT ==
+   (atencao em grade removida de 11 blocos)
+  -- mamografia --
+   maxvit_t    mamografia sem grade   posto  11.0 [9.9;11.9] (n  11.6)  raio  75.9 [72.8;79.4] px  arranjo16 +0.300 [+0.288;+0.311]
+-> ablacao gravado
+  -- dtd --
+   maxvit_t    dtd sem grade          posto  20.5 [15.7;25.9] (n  22.8)  raio  92.3 [84.7;101.5] px  arranjo16 +0.181 [+0.138;+0.228]
+-> ablacao gravado
+  -- pet --
+   maxvit_t    pet sem grade          posto  18.9 [16.5;21.2] (n  21.2)  raio 114.1 [105.7;121.3] px  arranjo16 +0.198 [+0.161;+0.240]
+-> ablacao gravado
+  -- sun397 --
+   maxvit_t    sun397 sem grade       posto  20.1 [18.2;22.2] (n  22.5)  raio 122.6 [115.3;130.0] px  arranjo16 +0.212 [+0.183;+0.247]
+-> ablacao gravado
+
+concluido

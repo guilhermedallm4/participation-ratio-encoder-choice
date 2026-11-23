@@ -1,0 +1,35 @@
+
+== mamografia: 387 imagens, 2 classes, 103 pacientes ==
+   resnet50    AUC 0.711 [0.658;0.754]  (n=387, 2 classes)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+   convnext_t  AUC 0.712 [0.661;0.763]  (n=387, 2 classes)
+   swin_t      AUC 0.646 [0.589;0.704]  (n=387, 2 classes)
+   maxvit_t    AUC 0.709 [0.652;0.771]  (n=387, 2 classes)
+   vit_s16     AUC 0.629 [0.574;0.680]  (n=387, 2 classes)
+   vit_b16     AUC 0.599 [0.545;0.654]  (n=387, 2 classes)
+
+== dtd: 387 imagens, 47 classes ==
+   resnet50    acurácia 0.519 [0.470;0.574]  (n=387, 47 classes)
+   convnext_t  acurácia 0.537 [0.486;0.581]  (n=387, 47 classes)
+   swin_t      acurácia 0.576 [0.527;0.623]  (n=387, 47 classes)
+   maxvit_t    acurácia 0.517 [0.465;0.566]  (n=387, 47 classes)
+   vit_s16     acurácia 0.532 [0.478;0.576]  (n=387, 47 classes)
+   vit_b16     acurácia 0.553 [0.499;0.597]  (n=387, 47 classes)
+
+== pet: 387 imagens, 37 classes ==
+   resnet50    acurácia 0.752 [0.711;0.793]  (n=387, 37 classes)
+   convnext_t  acurácia 0.850 [0.817;0.884]  (n=387, 37 classes)
+   swin_t      acurácia 0.837 [0.801;0.873]  (n=387, 37 classes)
+   maxvit_t    acurácia 0.894 [0.863;0.922]  (n=387, 37 classes)
+   vit_s16     acurácia 0.765 [0.724;0.806]  (n=387, 37 classes)
+   vit_b16     acurácia 0.819 [0.788;0.855]  (n=387, 37 classes)
+
+== sun397: 387 imagens, 23 classes ==
+   resnet50    acurácia 0.828 [0.789;0.862]  (n=384, 22 classes)
+   convnext_t  acurácia 0.883 [0.849;0.914]  (n=384, 22 classes)
+   swin_t      acurácia 0.875 [0.839;0.906]  (n=384, 22 classes)
+   maxvit_t    acurácia 0.867 [0.831;0.901]  (n=384, 22 classes)
+   vit_s16     acurácia 0.844 [0.807;0.875]  (n=384, 22 classes)
+   vit_b16     acurácia 0.914 [0.883;0.940]  (n=384, 22 classes)
+
+concluido

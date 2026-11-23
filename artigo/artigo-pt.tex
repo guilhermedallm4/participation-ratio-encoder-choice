@@ -1,0 +1,349 @@
+\documentclass{esannV2}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{graphicx}
+\usepackage{amssymb,amsmath,array}
+\usepackage{booktabs}
+
+% O esannV2.cls define \tablename e \abstractname com \newcommand e o babel os
+% redefine no \begin{document}. Forcamos depois dos dois.
+\AtBeginDocument{%
+  \renewcommand{\tablename}{Tabela}%
+  \renewcommand{\abstractname}{Resumo}%
+}
+
+% Margens fixadas pelo esannV2.cls: 5,2 cm em cima e embaixo, 4,4 cm nas
+% laterais, em A4. Nao alterar. Bloco de 12,2 cm.
+\voffset 0 cm \hoffset 0 cm \addtolength{\textwidth}{0cm}
+\addtolength{\textheight}{0cm}\addtolength{\leftmargin}{0cm}
+
+\begin{document}
+
+\title{A razão de participação sinaliza algumas representações degeneradas,\\mas não ordena com segurança extratores sadios}
+
+% TODO: confirmar o nome completo e o nome exato da unidade antes de submeter.
+\author{Guilherme Lima
+\vspace{.3cm}\\
+Universidade Federal de Pelotas - Instituto de Informática \\
+Pelotas, RS - Brasil
+}
+
+\maketitle
+
+\begin{abstract}
+A geometria da representação congelada costuma ser oferecida como um jeito sem
+rótulos de escolher um extrator, sob a premissa de que uma medida
+correlacionada com a acurácia final serve para ordenar candidatos. Testamos
+essa premissa em dezessete extratores e quatro domínios, num desenho em cruz:
+nove arquiteturas sob um mesmo regime supervisionado na ImageNet e nove
+pré-treinos sobre o mesmo ViT-B/16. A razão de participação de fato se
+correlaciona com a acurácia de uma sonda linear ($\rho = 0{,}41$,
+$p = 0{,}007$), mas a correlação mora na cauda colapsada --- $0{,}27$ sem o
+MAE, $0{,}21$ sem também os dois CLIP, $0{,}11$ entre as nove arquiteturas ---
+e condicionar à largura deixa $+0{,}39$ ($p = 0{,}010$). Um checkpoint retido,
+predito antes da medição, mostra a premissa falhando de forma informativa: o
+BEiT-3 fica entre os piores dos dezoito na sonda e o problema só é visível para
+a razão em um domínio dentre os quatro avaliados. A medida sinaliza algumas
+representações degeneradas, mas não encontramos evidência confiável de que
+ordene as sadias, e ela serve melhor para diagnóstico do que para seleção.
+\end{abstract}
+
+\section{Introdução}
+
+Escolher um extrator congelado para um domínio pequeno é um problema de
+medição. A resposta usual, comparar acurácia na tarefa final, é quase toda
+ruído nesse tamanho de amostra: reamostrar a partição move o escore mais do que
+a maioria das diferenças de arquitetura \cite{Bouthillier}, e as barras de erro
+da validação cruzada em $n \approx 100$ chegam a $\pm 10$ pontos
+\cite{Varoquaux}. Num estudo recente de hematologia, uma sonda linear
+ajustada no domínio de origem previu mal qual extrator resistiria à mudança de
+equipamento ($\rho$ mediano de 0,45 entre as duas ordens) \cite{Hemato}. A geometria da representação congelada promete uma saída: sem
+rótulos e a um passo adiante por extrator, permitiria escolher sem rodar a
+avaliação incerta demais para merecer confiança. A promessa repousa num passo
+raramente testado --- o de que uma medida \emph{correlacionada} com a acurácia
+pode \emph{ordenar} candidatos. É esse passo que testamos.
+
+Testá-lo exige um desenho que separe arquitetura de pré-treino. Quando os dois
+variam juntos, como na maioria das comparações de extratores, uma diferença
+geométrica entre dois modelos admite ao menos duas explicações e os dados não
+decidem: um aparente efeito de arquitetura pode ser a receita que cada família
+traz consigo. Usamos então um desenho em cruz, que mantém fixo o \emph{regime} de
+pré-treino, classificação supervisionada na ImageNet, entre nove arquiteturas
+cujas receitas ainda diferem, e varia nove pré-treinos sobre uma mesma
+arquitetura e parametrização ViT-B/16. Os braços se encontram num checkpoint
+compartilhado, e os dezessete extratores cruzam quatro domínios, dando 68
+pares.
+
+Duas contribuições. Localizamos onde a associação entre razão de participação e
+acurácia da sonda de fato mora --- na cauda colapsada, não numa ordenação fina
+--- e mostramos que a largura não a explica. E testamos a afirmação resultante
+fora da amostra, em checkpoints retidos com a predição registrada de antemão, o
+que a delimita pelos dois lados.
+
+\section{Medidas e protocolo}
+
+\subsection{Extratores e domínios}
+
+Braço da arquitetura, todos pré-treinados por classificação supervisionada na
+ImageNet, mas de receitas e fornecedores distintos (\textsc{fb\_in1k},
+\textsc{ra2\_in1k}, \textsc{ms\_in1k}, \textsc{augreg\_in1k}, pesos
+\textsc{v2} da torchvision, checkpoints nativos de 512\,px): ResNet-18 e -50
+\cite{ResNet}, ConvNeXt-T \cite{ConvNeXt}, EfficientNet-B3 \cite{EffNet},
+Swin-T \cite{Swin}, MaxViT-T e -S \cite{MaxViT}, ViT-S/16 e ViT-B/16
+\cite{ViT}. Braço do pré-treino, o mesmo ViT-B/16 em nove versões: quatro
+supervisionadas de corpora e receitas diferentes (IN-21k$\to$1k, IN-21k, IN-1k,
+DeiT3 \cite{DeiT3}), duas auto-supervisionadas (DINO \cite{DINO}, MAE
+\cite{MAE}) e três com linguagem (CLIP em dois corpora \cite{CLIP}, SigLIP
+\cite{SigLIP}).
+
+Quatro domínios, em cinza e $512\times512$ para que a cor não confunda --- o
+canal único é replicado nas três entradas e cada checkpoint mantém a
+\emph{sua} normalização de pré-treino: \textbf{mamografia} (INbreast
+\cite{INbreast}), \textbf{DTD} \cite{DTD}, \textbf{Pet} \cite{Pet} e
+\textbf{SUN397} \cite{SUN397}, com 2, 47, 37 e 22 classes; 387 imagens em cada
+um, exceto o SUN397, com 384 depois de descartar classes com menos de cinco
+exemplos. As imagens foram sorteadas em rodízio entre as classes com semente
+fixa, ficando quase balanceadas onde o banco permite (8--9 por classe no DTD,
+5--16 no Pet, 3--24 no SUN397); a distribuição importa porque a razão sai da
+covariância global, que mistura variação intra e interclasse. O recorte do
+SUN397 é um fragmento do espelho público, então as acurácias são comparáveis
+entre os nossos extratores, mas não devem ser lidas contra a literatura de
+transferência.
+
+Nenhum extrator é ajustado; a sonda abaixo é o único componente treinado. A
+geometria usa as 200 primeiras imagens de cada domínio e a sonda, a amostra
+inteira. Nos ViT a 512\,px os \emph{embeddings} posicionais são interpolados
+para a grade de 32$\times$32 (\textsc{dynamic\_img\_size} do \texttt{timm}); os
+MaxViT são checkpoints nativos de 512\,px. Identificadores dos checkpoints,
+sementes, código de extração e de permutação, o registro prévio da predição da
+§3.2 e a tabela completa por checkpoint estão no
+repositório.\footnote{\textsc{url do repositório --- preencher antes de submeter}}
+
+\subsection{As medidas}
+
+\paragraph{Extração.} Idêntica nos dezessete: o último mapa de características
+e então \textbf{média espacial global}, com as fichas de prefixo dos ViT
+\emph{descartadas} e as espaciais remontadas em grade antes da média --- o
+token \textsc{cls} nunca é usado, de modo que convolucionais e transformadores
+não diferem na estratégia de extração.
+
+\paragraph{Razão de participação.} $(\sum_i \lambda_i)^2/\sum_i \lambda_i^2$
+sobre os autovalores da covariância dessa representação: quantas direções ela
+de fato usa. Ela \emph{não} é a definição entrópica de posto efetivo
+\cite{EffRank}, e a preferimos por ser menos influenciada pelos autovalores
+menores.
+
+\paragraph{Sonda linear.} Regressão logística com padronização, cinco dobras
+externas, estratificadas por classe e \textbf{agrupadas por paciente} na
+mamografia (103 pacientes), com $C$ buscado em três dobras internas,
+independente para cada extrator, domínio e dobra; fixá-lo mediria a largura. As notas saem da dobra retida (AUC na mamografia, acurácia nos demais) e
+não precisam coincidir de um domínio para o outro, porque toda correlação adiante é
+calculada sobre notas padronizadas dentro de cada domínio. Três partições independentes (sementes 0, 1 e 2) diferem entre si
+em 0,002--0,006, muito abaixo da largura dos intervalos.
+
+\subsection{Incerteza}
+
+Os intervalos vêm de reamostrar \emph{imagens}, e \emph{pacientes} na
+mamografia; na sonda as reamostras das três partições são agrupadas. A razão de
+participação é a exceção. Sortear com reposição deixa menos imagens distintas e
+move o espectro por um motivo que nada tem a ver com a variabilidade que
+queremos, então subamostramos \emph{sem} reposição em $m = n/2 = 100$,
+sorteando 400 subamostras e relatando ponto e intervalo no mesmo $m$. Esse
+intervalo são os percentis 2,5 e 97,5 dos 400 valores, sem ajuste, e portanto
+estima o quanto a razão se move entre subconjuntos de 100 imagens desta
+amostra --- não a incerteza sobre um valor populacional, que exigiria um
+modelo de como a amostra surgiu. A covariância de $m$ imagens tem posto no
+máximo $m-1$, o que limita a estimativa a 99.
+
+Os pontos das correlações \emph{não} são independentes: cada extrator aparece
+nos quatro domínios. A inferência permuta rótulos de extrator, \textbf{a mesma
+permutação nos quatro domínios} (20\,000 sorteios); embaralhar cada domínio por
+si deixaria o nulo aleatório demais e o teste fácil demais de passar. Os
+intervalos vêm de \emph{jackknife} deixando um extrator de fora, tomado depois
+da transformação z de Fisher.
+
+\section{Resultados}
+
+\subsection{A ordem é estável, as magnitudes não}
+
+Quanto da variação de uma medida vem do banco em vez do extrator depende muito
+da medida: 43\,\% para a razão de participação, 12\,\% para o quanto uma
+posição central da saída enxerga da imagem (um raio por gradiente, em pixels da
+entrada \cite{Luo}) e 0,5\,\% para o quanto cada bloco do transformador altera
+o que recebe, $\|F(x)\|/\|x\|$, nos nove ViT-B/16, onde os blocos se
+correspondem --- as duas últimas estão definidas por inteiro no repositório.
+São duas ordens de grandeza entre os extremos, e a ordem se mantém em conjuntos
+de 6, 12 e 17 extratores, que são simplesmente as levas de medição como foram
+se acumulando, sem nenhuma seleção envolvida. O que não se mantém é o tamanho
+dos números: essa primeira fatia foi de 66\,\%, 31\,\% e 43\,\% nos três
+conjuntos. Uma fatia dessas descreve o conjunto em que foi medida e pouco mais. \emph{Uma fatia de variância medida sobre
+um punhado de modelos descreve aquele punhado.}
+
+O tamanho da amostra se comporta do mesmo jeito, e o teto de 99 não é remoto: a
+maior razão que medimos é 55,4, a única dos 68 pares acima da metade, com
+mediana de 20,1. As magnitudes dependem de $m$ --- a mediana de PR(50)/PR(200)
+é 0,74 --- mas a ordem não. Sendo cada tamanho a média de 40 subamostras, o
+Spearman entre a razão com 50 e com 200 imagens fica em 0,990--1,000 nos quatro
+domínios (uma comparação por domínio, sobre as médias), e a
+Tabela~\ref{tab:sens} é indistinguível com metade das imagens. O checkpoint
+colapsado é o mais estável de todos: 1,81 com 50 e com 200 imagens.
+
+\subsection{De onde vem a associação}
+
+Dar a cada extrator as duas notas e padronizá-las dentro de cada domínio dá
+$\rho = +0{,}41$ nos dezessete ($p_{\text{perm}} = 0{,}007$; IC
+95\,\% $[+0{,}07; +0{,}67]$). A associação enfraquece bruscamente quando os
+checkpoints extremos saem: a Tabela~\ref{tab:sens} mostra $\rho$ caindo a $+0{,}27$ sem o MAE (único colapsado, de 1,8 a 4,2
+direções) e a $+0{,}21$ sem também os dois CLIP, com o intervalo contendo zero. Entre as nove
+arquiteturas, nenhuma colapsada, $\rho = +0{,}11$. Os intervalos continuam
+compatíveis com associação moderada, chegando a $+0{,}51$, e não fizemos teste
+de equivalência contra um efeito mínimo de interesse. Dá para dizer que não
+apareceu evidência confiável de capacidade de ordenação, mas não que ela seja
+nula.
+
+A largura em canais, confundidor óbvio, se associa à sonda por conta própria
+($+0{,}17$); controlá-la por Spearman parcial deixa a razão em $+0{,}39$
+($p = 0{,}010$). A parcial é a correlação dos resíduos dos postos de razão e
+sonda depois de os dois serem regredidos nos postos da largura. O $p$ exige
+cuidado. A hipótese a descartar é que a razão nada acrescenta uma vez conhecida
+a largura, e um nulo para ela precisa manter viva a ligação largura--sonda em
+vez de quebrá-la também; por isso usamos Freedman--Lane: regride-se a sonda na
+largura, embaralham-se só os resíduos (no nível do extrator, mesma permutação nos
+quatro domínios) e soma-se o ajuste intacto de volta. Na regressão equivalente, padronizada dentro do domínio, o
+coeficiente da largura é $+0{,}02$ contra $+0{,}57$ da razão ($p = 0{,}003$,
+mesmo nulo). O raio do campo, medido em paralelo o tempo todo, não mostra
+associação com a sonda ($+0{,}20$, $p = 0{,}26$).
+
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrc@{}}
+\toprule
+conjunto & $k$ & $\rho$ & $p$ & IC 95\,\% \\
+\midrule
+todos os 17 & 17 & $+0{,}41$ & 0,007 & $[+0{,}07; +0{,}67]$ \\
+sem o MAE & 16 & $+0{,}27$ & 0,075 & $[-0{,}01; +0{,}51]$ \\
+sem MAE e os dois CLIP & 14 & $+0{,}21$ & 0,223 & $[-0{,}10; +0{,}48]$ \\
+\midrule
+9 pré-treinos & 9 & $+0{,}41$ & 0,088 & $[-0{,}18; +0{,}78]$ \\
+9 pré-treinos, sem MAE & 8 & $+0{,}26$ & 0,273 & $[-0{,}16; +0{,}60]$ \\
+9 arquiteturas & 9 & $+0{,}11$ & 0,662 & $[-0{,}34; +0{,}51]$ \\
+\bottomrule
+\end{tabular}
+\caption{Sensibilidade de $\rho$ (razão de participação contra sonda) à
+retirada dos checkpoints de dimensionalidade extrema. $p$ por permutação de
+extratores, intervalo por jackknife deixando um extrator de fora, na escala de
+Fisher; o intervalo contém zero exatamente onde $p > 0{,}05$.}
+\label{tab:sens}
+\end{table}
+
+Chamamos um checkpoint de \emph{colapsado} só depois de olhar: a razão do MAE
+é 1,8--4,2, de três a dez vezes menor que a do extrator seguinte em qualquer
+domínio, e ele é a pior sonda dos dezessete nos quatro (0,533 de AUC; 0,391,
+0,322 e 0,627 de acurácia). Isso é circular e convém dizer --- razão baixa é
+exatamente o que queremos dizer por colapsado, então dentro deste conjunto ``a
+razão flagra colapso'' não tem como ser provado errado.
+
+Testamos fora dele, com dois extratores \emph{retidos} medidos pelo mesmo
+protocolo, com a predição registrada em arquivo do repositório anterior ao
+primeiro resultado gravado. A regra de sinalização é fixada de antemão e
+aplicada por domínio: um extrator é \emph{sinalizado} onde sua razão fica
+abaixo do menor valor de referência não colapsado \emph{naquele} domínio (4,93
+na mamografia, 9,78 no DTD, 11,35 no Pet, 10,43 no SUN397), de modo que colapso
+aqui descreve a geometria dentro de um domínio e não o checkpoint como um
+todo. Um ViT-B/16 sem
+treino é sinalizado nos quatro, de 3,9 a 6,8 vezes abaixo dessa referência, e
+sonda no acaso. O BEiT-3 base \cite{BEiT3}, checkpoint de modelagem mascarada
+sem ajuste fino de classificação, é o caso informativo: sua sonda é a segunda
+pior dos dezoito em DTD, Pet e SUN397 e está entre as cinco piores na
+mamografia, mas a razão só o sinaliza na mamografia (2,2 contra 4,9), ficando
+dentro da distribuição dos dezessete nos demais (17,7--22,8). A predição falhou
+em três domínios de quatro, na direção que importa: há representação ruim que
+esta geometria não enxerga. Mal colocado nas duas medidas em todos os
+domínios, esse checkpoint também sustenta a correlação no lugar do MAE
+($\rho = +0{,}36$, $p = 0{,}018$, contra $+0{,}27$ sem nenhum dos dois), embora
+essa seja uma análise secundária e não registrada. Dois extratores não bastam
+para dizer com que frequência a medida acerta, então o que o teste entrega é um
+contraexemplo e não um detector caracterizado.
+
+Nesta seção foram feitos nove testes; apenas o primeiro e o teste retido eram
+pré-especificados, e não há correção de multiplicidade. Uma associação entre
+raio do campo e sonda no braço do pré-treino ($\rho = +0{,}56$,
+$p = 0{,}009$) é relatada como exploratória, sem valor confirmatório.
+
+\section{Discussão e limitações}
+
+Uma representação pode ter dimensionalidade global sadia e ainda assim ser ruim
+para a tarefa: é o que o BEiT-3 retido mostra, e é a lição substantiva. Uma
+geometria assim diz quando uma representação degenerou; não diz o quanto uma
+representação é boa. A razão de participação de fato sinaliza
+representação degenerada no domínio em que é medida, por margem de 2 a 7 vezes
+nos três checkpoints colapsados que encontramos, mas sem garantia de cobertura,
+e não encontramos evidência confiável de que ela ordene extratores sadios ---
+o que não exige que a capacidade seja nula, apenas que dezessete extratores não
+a demonstraram. O raio do campo não serve a nenhum dos dois fins, e um ponto
+vale além das duas medidas: um número como ``43\,\% da variação vem do banco''
+precisa ser relatado junto com os modelos em que foi calculado.
+
+Limitações. A sonda é linear e congelada, e o MAE é o lembrete de que
+dimensionalidade baixa diz que a informação não está linearmente acessível, não
+se ela existe. No braço do pré-treino a permutação só chama um resultado de
+significativo acima de $|\rho| = 0{,}46$, que é o percentil 95 do nulo e não um
+cálculo de poder, de modo que o $0{,}41$ ali fica aquém. O teste retido
+cobre um checkpoint colapsado de cada vez, nunca um \emph{conjunto} deles. Uma quarta
+medida, sensibilidade ao embaralhamento de retalhos, foi descartada como
+artefato de fase da grade; esse diagnóstico e um controle em RGB (a razão muda
+por fatores de 1,03 a 1,16 em oito dos nove ViT-B/16) estão no repositório.
+Por fim, toda medida aqui olha a representação inteira de uma vez e por isso
+não enxerga como as partes dela se combinam.
+
+\begin{footnotesize}
+\begin{thebibliography}{99}
+
+\bibitem{Bouthillier} X. Bouthillier et al., Accounting for variance in machine learning benchmarks. \emph{MLSys}, 2021.
+
+\bibitem{Varoquaux} G. Varoquaux, Cross-validation failure: small sample sizes lead to large error bars. \emph{NeuroImage}, 180:68-77, 2018.
+
+\bibitem{Hemato} J. K. Sharma and P. Tapadiya, Can you trust frozen hematology foundation models under acquisition shift? arXiv:2608.25148, 2026.
+
+\bibitem{INbreast} I. C. Moreira et al., INbreast: toward a full-field digital mammographic database. \emph{Academic Radiology}, 19(2):236-248, 2012.
+
+\bibitem{DTD} M. Cimpoi, S. Maji, I. Kokkinos, S. Mohamed and A. Vedaldi, Describing textures in the wild. \emph{CVPR}, 3606-3613, 2014.
+
+\bibitem{Pet} O. M. Parkhi, A. Vedaldi, A. Zisserman and C. V. Jawahar, Cats and dogs. \emph{CVPR}, 3498-3505, 2012.
+
+\bibitem{SUN397} J. Xiao, J. Hays, K. A. Ehinger, A. Oliva and A. Torralba, SUN database: large-scale scene recognition from abbey to zoo. \emph{CVPR}, 3485-3492, 2010.
+
+\bibitem{EffRank} O. Roy and M. Vetterli, The effective rank: a measure of effective dimensionality. \emph{EUSIPCO}, 606-610, 2007.
+
+\bibitem{Luo} W. Luo, Y. Li, R. Urtasun and R. Zemel, Understanding the effective receptive field in deep convolutional neural networks. \emph{NIPS}, 4898-4906, 2016.
+
+\bibitem{MaxViT} Z. Tu et al., MaxViT: multi-axis vision transformer. \emph{ECCV}, 459-479, 2022.
+
+\bibitem{ViT} A. Dosovitskiy et al., An image is worth 16x16 words: transformers for image recognition at scale. \emph{ICLR}, 2021.
+
+\bibitem{ResNet} K. He, X. Zhang, S. Ren and J. Sun, Deep residual learning for image recognition. \emph{CVPR}, 770-778, 2016.
+
+\bibitem{Swin} Z. Liu et al., Swin transformer: hierarchical vision transformer using shifted windows. \emph{ICCV}, 10012-10022, 2021.
+
+\bibitem{ConvNeXt} Z. Liu et al., A ConvNet for the 2020s. \emph{CVPR}, 11976-11986, 2022.
+
+\bibitem{EffNet} M. Tan and Q. Le, EfficientNet: rethinking model scaling for convolutional neural networks. \emph{ICML}, 6105-6114, 2019.
+
+\bibitem{DeiT3} H. Touvron, M. Cord and H. Jegou, DeiT III: revenge of the ViT. \emph{ECCV}, 516-533, 2022.
+
+\bibitem{DINO} M. Caron et al., Emerging properties in self-supervised vision transformers. \emph{ICCV}, 9650-9660, 2021.
+
+\bibitem{MAE} K. He et al., Masked autoencoders are scalable vision learners. \emph{CVPR}, 16000-16009, 2022.
+
+\bibitem{BEiT3} W. Wang et al., Image as a foreign language: BEiT pretraining for all vision and vision-language tasks. \emph{CVPR}, 19175-19186, 2023.
+
+\bibitem{CLIP} A. Radford et al., Learning transferable visual models from natural language supervision. \emph{ICML}, 8748-8763, 2021.
+
+\bibitem{SigLIP} X. Zhai, B. Mustafa, A. Kolesnikov and L. Beyer, Sigmoid loss for language image pre-training. \emph{ICCV}, 11975-11986, 2023.
+
+\end{thebibliography}
+\end{footnotesize}
+
+\end{document}

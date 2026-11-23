@@ -1,0 +1,52 @@
+
+=== dtd (cansa/Describable-Textures-Dataset-DTD) ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+   50/387
+   100/387
+   150/387
+   200/387
+   250/387
+   300/387
+   350/387
+   -> 387 imagens, 47 classes
+
+=== pet (timm/oxford-iiit-pet) ===
+   50/387
+   100/387
+   150/387
+   200/387
+   250/387
+   300/387
+   350/387
+   -> 387 imagens, 37 classes
+
+=== sun397 (tanganke/sun397) ===
+   50/387
+   100/387
+   150/387
+   200/387
+   250/387
+   300/387
+   350/387
+   -> 387 imagens, 23 classes
+
+{
+ "dtd": {
+  "repo": "cansa/Describable-Textures-Dataset-DTD",
+  "imagens": 387,
+  "classes": 47,
+  "destino": "data/amostras/dtd"
+ },
+ "pet": {
+  "repo": "timm/oxford-iiit-pet",
+  "imagens": 387,
+  "classes": 37,
+  "destino": "data/amostras/pet"
+ },
+ "sun397": {
+  "repo": "tanganke/sun397",
+  "imagens": 387,
+  "classes": 23,
+  "destino": "data/amostras/sun397"
+ }
+}

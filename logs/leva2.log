@@ -1,0 +1,63 @@
+
+== 8. SEGUNDA LEVA DE EXTRATORES ==
+  -- mamografia --
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+   vit_b16_dino mamografia             posto   7.3 [6.4;8.4] (n   7.5)  raio  91.6 [88.5;94.7] px  arranjo16 +0.394 [+0.390;+0.398]
+   vit_b16_mae mamografia             posto   1.8 [1.7;2.0] (n   1.8)  raio 109.7 [106.9;111.9] px  arranjo16 +0.347 [+0.342;+0.353]
+   vit_b16_clip mamografia             posto   5.4 [4.9;5.9] (n   5.5)  raio 114.6 [109.9;119.3] px  arranjo16 +0.469 [+0.458;+0.480]
+   maxvit_s    mamografia             posto   7.5 [6.4;8.7] (n   7.8)  raio 109.6 [105.4;113.5] px  arranjo16 +0.522 [+0.480;+0.562]
+   efficientnet_b3 mamografia             posto  10.4 [9.6;11.4] (n  10.9)  raio  70.9 [68.8;73.6] px  arranjo16 +0.231 [+0.218;+0.243]
+   resnet18    mamografia             posto  10.5 [9.5;11.5] (n  11.1)  raio  87.3 [85.6;89.2] px  arranjo16 +0.404 [+0.394;+0.413]
+-> leva2 gravado
+  -- dtd --
+   vit_b16_dino dtd                    posto  31.6 [26.5;37.3] (n  38.8)  raio 137.6 [132.2;143.8] px  arranjo16 +0.248 [+0.229;+0.266]
+   vit_b16_mae dtd                    posto   4.2 [3.7;4.7] (n   4.3)  raio 132.4 [127.7;137.5] px  arranjo16 +0.152 [+0.140;+0.164]
+   vit_b16_clip dtd                    posto  27.8 [25.8;30.1] (n  32.9)  raio 171.2 [165.6;177.0] px  arranjo16 +0.360 [+0.330;+0.388]
+   maxvit_s    dtd                    posto   9.8 [8.3;11.6] (n  10.2)  raio 128.1 [122.3;135.2] px  arranjo16 +0.199 [+0.162;+0.235]
+   efficientnet_b3 dtd                    posto  38.1 [35.5;40.7] (n  48.1)  raio  93.3 [86.5;101.5] px  arranjo16 +0.271 [+0.226;+0.322]
+   resnet18    dtd                    posto  24.7 [20.3;29.1] (n  30.9)  raio  96.8 [94.6;99.3] px  arranjo16 +0.208 [+0.180;+0.234]
+-> leva2 gravado
+  -- pet --
+   vit_b16_dino pet                    posto  31.2 [28.8;33.9] (n  38.1)  raio 120.2 [114.2;125.5] px  arranjo16 +0.500 [+0.484;+0.515]
+   vit_b16_mae pet                    posto   3.3 [2.8;3.9] (n   3.3)  raio 127.4 [120.5;131.3] px  arranjo16 +0.326 [+0.314;+0.339]
+   vit_b16_clip pet                    posto  17.3 [15.4;19.3] (n  18.9)  raio 153.0 [146.2;159.0] px  arranjo16 +0.681 [+0.664;+0.697]
+   maxvit_s    pet                    posto  11.3 [9.4;13.9] (n  12.0)  raio 154.4 [145.6;163.9] px  arranjo16 +0.410 [+0.380;+0.442]
+   efficientnet_b3 pet                    posto  30.2 [27.9;32.7] (n  36.3)  raio 113.4 [107.2;119.7] px  arranjo16 +0.233 [+0.183;+0.297]
+   resnet18    pet                    posto  21.4 [19.9;22.7] (n  24.0)  raio  87.9 [85.7;90.3] px  arranjo16 +0.226 [+0.203;+0.253]
+-> leva2 gravado
+  -- sun397 --
+   vit_b16_dino sun397                 posto  20.3 [18.0;23.0] (n  22.9)  raio 125.8 [120.5;131.1] px  arranjo16 +0.383 [+0.369;+0.397]
+   vit_b16_mae sun397                 posto   3.1 [2.8;3.6] (n   3.1)  raio 134.2 [128.9;138.6] px  arranjo16 +0.294 [+0.283;+0.303]
+   vit_b16_clip sun397                 posto  20.0 [18.3;21.8] (n  22.2)  raio 159.4 [153.9;164.9] px  arranjo16 +0.603 [+0.584;+0.622]
+   maxvit_s    sun397                 posto  10.4 [8.9;12.2] (n  10.9)  raio 163.2 [154.3;171.9] px  arranjo16 +0.352 [+0.309;+0.393]
+   efficientnet_b3 sun397                 posto  24.5 [21.5;27.3] (n  28.5)  raio 118.3 [113.2;123.5] px  arranjo16 +0.412 [+0.371;+0.457]
+   resnet18    sun397                 posto  17.1 [14.7;19.6] (n  18.6)  raio  90.5 [88.0;93.0] px  arranjo16 +0.315 [+0.291;+0.341]
+-> leva2 gravado
+
+== 9. FLUXO RESIDUAL POR OBJETIVO DE PRE-TREINO ==
+  -- mamografia --
+   vit_b16     atencao global + MLP     ramo 0.815 [0.812;0.817]
+   vit_b16_dino atencao global + MLP     ramo 0.587 [0.586;0.588]
+   vit_b16_mae atencao global + MLP     ramo 0.681 [0.678;0.685]
+   vit_b16_clip atencao global + MLP     ramo 0.724 [0.722;0.725]
+-> fluxo2 gravado
+  -- dtd --
+   vit_b16     atencao global + MLP     ramo 0.812 [0.801;0.823]
+   vit_b16_dino atencao global + MLP     ramo 0.596 [0.591;0.601]
+   vit_b16_mae atencao global + MLP     ramo 0.648 [0.642;0.655]
+   vit_b16_clip atencao global + MLP     ramo 0.742 [0.734;0.749]
+-> fluxo2 gravado
+  -- pet --
+   vit_b16     atencao global + MLP     ramo 0.821 [0.815;0.826]
+   vit_b16_dino atencao global + MLP     ramo 0.592 [0.589;0.594]
+   vit_b16_mae atencao global + MLP     ramo 0.632 [0.628;0.636]
+   vit_b16_clip atencao global + MLP     ramo 0.733 [0.727;0.738]
+-> fluxo2 gravado
+  -- sun397 --
+   vit_b16     atencao global + MLP     ramo 0.811 [0.805;0.818]
+   vit_b16_dino atencao global + MLP     ramo 0.575 [0.572;0.578]
+   vit_b16_mae atencao global + MLP     ramo 0.636 [0.633;0.640]
+   vit_b16_clip atencao global + MLP     ramo 0.721 [0.713;0.728]
+-> fluxo2 gravado
+
+concluido

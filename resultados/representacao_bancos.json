@@ -1,0 +1,366 @@
+{
+ "dtd": {
+  "resnet50": {
+   "mecanismo": "convolucao pura",
+   "alcance": "local, hierarquica",
+   "canais": 2048,
+   "mapa": 16,
+   "posto_efetivo": 39.88833244974738,
+   "posto_fracao": 0.019476724828978213,
+   "dispersao_espacial": 0.8052009445729673,
+   "banda": {
+    "muito_baixa": 1.2830098867416382,
+    "baixa": 1.2028018236160278,
+    "media": 1.1624852418899536,
+    "alta": 1.2368849515914917
+   }
+  },
+  "maxvit_t": {
+   "mecanismo": "conv + atencao bairro + grade",
+   "alcance": "local e global, hierarquica",
+   "canais": 512,
+   "mapa": 16,
+   "posto_efetivo": 13.039893002402346,
+   "posto_fracao": 0.025468541020317082,
+   "dispersao_espacial": 0.866918200640894,
+   "banda": {
+    "muito_baixa": 1.0139726400375366,
+    "baixa": 1.0005334615707397,
+    "media": 1.0255333185195923,
+    "alta": 1.0160170793533325
+   }
+  },
+  "vit_b16": {
+   "mecanismo": "atencao global pura",
+   "alcance": "global, plana",
+   "canais": 768,
+   "mapa": 32,
+   "posto_efetivo": 53.30732610566928,
+   "posto_fracao": 0.06941058086675687,
+   "dispersao_espacial": 0.4992343627943965,
+   "banda": {
+    "muito_baixa": 1.1732608079910278,
+    "baixa": 1.157450795173645,
+    "media": 1.182977318763733,
+    "alta": 1.2250670194625854
+   }
+  },
+  "cka": {
+   "resnet50": {
+    "resnet50": 0.9999999999999999,
+    "maxvit_t": 0.3135319618151052,
+    "vit_b16": 0.62702968532714
+   },
+   "maxvit_t": {
+    "resnet50": 0.3135319618151052,
+    "maxvit_t": 1.0,
+    "vit_b16": 0.34776351377911374
+   },
+   "vit_b16": {
+    "resnet50": 0.62702968532714,
+    "maxvit_t": 0.34776351377911385,
+    "vit_b16": 1.0
+   }
+  },
+  "fluxo": {
+   "resnet50|conv residual": {
+    "ramo": 1.6764,
+    "fluxo": 0.6083,
+    "cka_preserva": 0.9738
+   },
+   "maxvit_t|atencao janela 7x7": {
+    "ramo": 0.3627,
+    "fluxo": 0.3627,
+    "cka_preserva": 0.9691
+   },
+   "maxvit_t|atencao em grade": {
+    "ramo": 0.4233,
+    "fluxo": 0.4233,
+    "cka_preserva": 0.9811
+   },
+   "maxvit_t|conv (MBConv)": {
+    "ramo": 0.3296,
+    "fluxo": 0.3296,
+    "cka_preserva": 0.9789
+   },
+   "vit_b16|atencao global + MLP": {
+    "ramo": 0.8118,
+    "fluxo": 0.8118,
+    "cka_preserva": 0.87
+   }
+  }
+ },
+ "pet": {
+  "resnet50": {
+   "mecanismo": "convolucao pura",
+   "alcance": "local, hierarquica",
+   "canais": 2048,
+   "mapa": 16,
+   "posto_efetivo": 40.23132191736956,
+   "posto_fracao": 0.019644200154965607,
+   "dispersao_espacial": 0.9400823883546093,
+   "banda": {
+    "muito_baixa": 1.4514929056167603,
+    "baixa": 1.3361643552780151,
+    "media": 1.3065961599349976,
+    "alta": 1.339437484741211
+   }
+  },
+  "maxvit_t": {
+   "mecanismo": "conv + atencao bairro + grade",
+   "alcance": "local e global, hierarquica",
+   "canais": 512,
+   "mapa": 16,
+   "posto_efetivo": 16.81284350214874,
+   "posto_fracao": 0.03283758496513426,
+   "dispersao_espacial": 0.8639674516387894,
+   "banda": {
+    "muito_baixa": 0.8634465336799622,
+    "baixa": 1.039353847503662,
+    "media": 1.0458613634109497,
+    "alta": 1.0052303075790405
+   }
+  },
+  "vit_b16": {
+   "mecanismo": "atencao global pura",
+   "alcance": "global, plana",
+   "canais": 768,
+   "mapa": 32,
+   "posto_efetivo": 46.967787255806556,
+   "posto_fracao": 0.06115597298933145,
+   "dispersao_espacial": 0.5725182465033075,
+   "banda": {
+    "muito_baixa": 1.2554682493209839,
+    "baixa": 1.2760015726089478,
+    "media": 1.278862476348877,
+    "alta": 1.2996420860290527
+   }
+  },
+  "cka": {
+   "resnet50": {
+    "resnet50": 1.0,
+    "maxvit_t": 0.49098485532408653,
+    "vit_b16": 0.6670893513735658
+   },
+   "maxvit_t": {
+    "resnet50": 0.49098485532408653,
+    "maxvit_t": 1.0000000000000002,
+    "vit_b16": 0.5937317419236866
+   },
+   "vit_b16": {
+    "resnet50": 0.6670893513735657,
+    "maxvit_t": 0.5937317419236867,
+    "vit_b16": 1.0
+   }
+  },
+  "fluxo": {
+   "resnet50|conv residual": {
+    "ramo": 1.7016,
+    "fluxo": 0.6218,
+    "cka_preserva": 0.969
+   },
+   "maxvit_t|atencao janela 7x7": {
+    "ramo": 0.3599,
+    "fluxo": 0.3599,
+    "cka_preserva": 0.972
+   },
+   "maxvit_t|atencao em grade": {
+    "ramo": 0.4063,
+    "fluxo": 0.4063,
+    "cka_preserva": 0.9778
+   },
+   "maxvit_t|conv (MBConv)": {
+    "ramo": 0.3332,
+    "fluxo": 0.3332,
+    "cka_preserva": 0.9846
+   },
+   "vit_b16|atencao global + MLP": {
+    "ramo": 0.8206,
+    "fluxo": 0.8206,
+    "cka_preserva": 0.8672
+   }
+  }
+ },
+ "sun397": {
+  "resnet50": {
+   "mecanismo": "convolucao pura",
+   "alcance": "local, hierarquica",
+   "canais": 2048,
+   "mapa": 16,
+   "posto_efetivo": 22.67155392302309,
+   "posto_fracao": 0.011070094688976118,
+   "dispersao_espacial": 0.9340463090892817,
+   "banda": {
+    "muito_baixa": 1.3391022682189941,
+    "baixa": 1.2662369012832642,
+    "media": 1.2202366590499878,
+    "alta": 1.2303088903427124
+   }
+  },
+  "maxvit_t": {
+   "mecanismo": "conv + atencao bairro + grade",
+   "alcance": "local e global, hierarquica",
+   "canais": 512,
+   "mapa": 16,
+   "posto_efetivo": 12.198057214165834,
+   "posto_fracao": 0.023824330496417644,
+   "dispersao_espacial": 0.8758267286083803,
+   "banda": {
+    "muito_baixa": 1.0848087072372437,
+    "baixa": 1.1151682138442993,
+    "media": 1.118275761604309,
+    "alta": 1.0800881385803223
+   }
+  },
+  "vit_b16": {
+   "mecanismo": "atencao global pura",
+   "alcance": "global, plana",
+   "canais": 768,
+   "mapa": 32,
+   "posto_efetivo": 29.139151855815456,
+   "posto_fracao": 0.037941603978926375,
+   "dispersao_espacial": 0.5541091113368897,
+   "banda": {
+    "muito_baixa": 1.2467533349990845,
+    "baixa": 1.275730013847351,
+    "media": 1.2701632976531982,
+    "alta": 1.2860347032546997
+   }
+  },
+  "cka": {
+   "resnet50": {
+    "resnet50": 1.0,
+    "maxvit_t": 0.42838313941857725,
+    "vit_b16": 0.7518466060735415
+   },
+   "maxvit_t": {
+    "resnet50": 0.42838313941857725,
+    "maxvit_t": 0.9999999999999998,
+    "vit_b16": 0.525847962956132
+   },
+   "vit_b16": {
+    "resnet50": 0.7518466060735414,
+    "maxvit_t": 0.525847962956132,
+    "vit_b16": 0.9999999999999999
+   }
+  },
+  "fluxo": {
+   "resnet50|conv residual": {
+    "ramo": 1.6234,
+    "fluxo": 0.6023,
+    "cka_preserva": 0.9733
+   },
+   "maxvit_t|atencao janela 7x7": {
+    "ramo": 0.3556,
+    "fluxo": 0.3556,
+    "cka_preserva": 0.9695
+   },
+   "maxvit_t|atencao em grade": {
+    "ramo": 0.4089,
+    "fluxo": 0.4089,
+    "cka_preserva": 0.9811
+   },
+   "maxvit_t|conv (MBConv)": {
+    "ramo": 0.3389,
+    "fluxo": 0.3389,
+    "cka_preserva": 0.9849
+   },
+   "vit_b16|atencao global + MLP": {
+    "ramo": 0.8115,
+    "fluxo": 0.8115,
+    "cka_preserva": 0.8709
+   }
+  }
+ },
+ "mamografia": {
+  "resnet50": {
+   "mecanismo": "convolucao pura",
+   "alcance": "local, hierarquica",
+   "canais": 2048,
+   "mapa": 16,
+   "posto_efetivo": 11.699019234508695,
+   "posto_fracao": 0.005712411735599949,
+   "dispersao_espacial": 0.9838222443049868,
+   "banda": {
+    "muito_baixa": 1.2311137914657593,
+    "baixa": 1.2722041606903076,
+    "media": 1.2428122758865356,
+    "alta": 1.2029591798782349
+   }
+  },
+  "maxvit_t": {
+   "mecanismo": "conv + atencao bairro + grade",
+   "alcance": "local e global, hierarquica",
+   "canais": 512,
+   "mapa": 16,
+   "posto_efetivo": 12.492055292039394,
+   "posto_fracao": 0.02439854549226444,
+   "dispersao_espacial": 0.9585527554340855,
+   "banda": {
+    "muito_baixa": 0.984122097492218,
+    "baixa": 0.997636616230011,
+    "media": 1.002030372619629,
+    "alta": 0.9587276577949524
+   }
+  },
+  "vit_b16": {
+   "mecanismo": "atencao global pura",
+   "alcance": "global, plana",
+   "canais": 768,
+   "mapa": 32,
+   "posto_efetivo": 12.89783909433988,
+   "posto_fracao": 0.01679406132075505,
+   "dispersao_espacial": 0.8004617471312637,
+   "banda": {
+    "muito_baixa": 1.1222031116485596,
+    "baixa": 1.0259288549423218,
+    "media": 0.981451690196991,
+    "alta": 1.0482877492904663
+   }
+  },
+  "cka": {
+   "resnet50": {
+    "resnet50": 1.0,
+    "maxvit_t": 0.6430092454306897,
+    "vit_b16": 0.6913424067376193
+   },
+   "maxvit_t": {
+    "resnet50": 0.6430092454306898,
+    "maxvit_t": 1.0,
+    "vit_b16": 0.6462608129673805
+   },
+   "vit_b16": {
+    "resnet50": 0.6913424067376192,
+    "maxvit_t": 0.6462608129673806,
+    "vit_b16": 1.0
+   }
+  },
+  "fluxo": {
+   "resnet50|conv residual": {
+    "ramo": 1.6683,
+    "fluxo": 0.629,
+    "cka_preserva": 0.9824
+   },
+   "maxvit_t|atencao janela 7x7": {
+    "ramo": 0.3773,
+    "fluxo": 0.3773,
+    "cka_preserva": 0.9841
+   },
+   "maxvit_t|atencao em grade": {
+    "ramo": 0.4405,
+    "fluxo": 0.4405,
+    "cka_preserva": 0.9838
+   },
+   "maxvit_t|conv (MBConv)": {
+    "ramo": 0.2926,
+    "fluxo": 0.2926,
+    "cka_preserva": 0.9969
+   },
+   "vit_b16|atencao global + MLP": {
+    "ramo": 0.8146,
+    "fluxo": 0.8146,
+    "cka_preserva": 0.9145
+   }
+  }
+ }
+}

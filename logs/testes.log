@@ -1,0 +1,110 @@
+
+== 1. INTERVALO POR REAMOSTRAGEM (3 arquiteturas x 4 bancos) ==
+  -- mamografia --
+   resnet50    mamografia             posto  11.1 [10.1;12.1] (n  11.7)  raio  71.7 [69.6;73.6] px  arranjo16 +0.601 [+0.587;+0.617]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+   maxvit_t    mamografia             posto  11.8 [10.9;12.6] (n  12.5)  raio 111.1 [105.6;115.8] px  arranjo16 +0.190 [+0.175;+0.207]
+   vit_b16     mamografia             posto  12.1 [11.1;13.3] (n  12.9)  raio 161.9 [154.7;168.6] px  arranjo16 +0.708 [+0.695;+0.720]
+-> ic gravado
+  -- dtd --
+   resnet50    dtd                    posto  32.2 [29.1;35.5] (n  39.9)  raio  76.1 [71.3;80.4] px  arranjo16 +0.274 [+0.233;+0.312]
+   maxvit_t    dtd                    posto  12.4 [10.0;15.6] (n  13.0)  raio 123.9 [118.0;131.7] px  arranjo16 +0.140 [+0.111;+0.172]
+   vit_b16     dtd                    posto  41.7 [38.9;44.4] (n  53.3)  raio 194.3 [188.0;200.7] px  arranjo16 +0.573 [+0.522;+0.621]
+-> ic gravado
+  -- pet --
+   resnet50    pet                    posto  32.5 [30.1;34.7] (n  40.2)  raio  70.1 [67.8;72.7] px  arranjo16 +0.763 [+0.717;+0.808]
+   maxvit_t    pet                    posto  15.5 [13.7;17.4] (n  16.8)  raio 147.4 [138.8;154.5] px  arranjo16 +0.244 [+0.220;+0.275]
+   vit_b16     pet                    posto  37.9 [35.2;40.4] (n  47.0)  raio 203.5 [195.5;210.6] px  arranjo16 +0.953 [+0.931;+0.977]
+-> ic gravado
+  -- sun397 --
+   resnet50    sun397                 posto  20.3 [17.8;23.2] (n  22.7)  raio  73.1 [69.2;76.5] px  arranjo16 +0.566 [+0.532;+0.605]
+   maxvit_t    sun397                 posto  11.6 [10.1;13.2] (n  12.2)  raio 157.6 [150.7;163.4] px  arranjo16 +0.253 [+0.220;+0.288]
+   vit_b16     sun397                 posto  25.5 [23.1;28.0] (n  29.1)  raio 207.3 [201.8;212.7] px  arranjo16 +0.966 [+0.939;+0.996]
+-> ic gravado
+
+== 2. RESOLUCAO: o ViT a 224, 384 e 512 ==
+  -- mamografia --
+   vit_b16     mamografia @224        posto  10.5 [9.4;11.7] (n  11.1)  raio  73.6 [69.2;77.5] px  arranjo16 +0.276 [+0.262;+0.290]
+   vit_b16     mamografia @384        posto  11.8 [10.8;13.0] (n  12.5)  raio 141.4 [133.1;149.7] px  arranjo16 +0.181 [+0.168;+0.194]
+   vit_b16     mamografia @512        posto  12.1 [11.1;13.3] (n  12.9)  raio 161.9 [154.7;168.6] px  arranjo16 +0.708 [+0.695;+0.720]
+   vit_s16     mamografia @224        posto  12.2 [11.2;13.3] (n  12.9)  raio  67.5 [62.3;71.5] px  arranjo16 +0.461 [+0.446;+0.479]
+   vit_s16     mamografia @512        posto   8.4 [7.5;9.4] (n   8.8)  raio 166.9 [158.0;174.6] px  arranjo16 +0.991 [+0.983;+1.002]
+-> resolucao gravado
+  -- dtd --
+   vit_b16     dtd @224               posto  43.1 [39.7;45.9] (n  55.6)  raio  78.4 [73.1;84.1] px  arranjo16 +0.273 [+0.241;+0.311]
+   vit_b16     dtd @384               posto  43.3 [40.5;46.1] (n  55.9)  raio 142.0 [135.0;149.2] px  arranjo16 +0.309 [+0.276;+0.349]
+   vit_b16     dtd @512               posto  41.7 [38.9;44.4] (n  53.3)  raio 194.3 [188.0;200.7] px  arranjo16 +0.573 [+0.522;+0.621]
+   vit_s16     dtd @224               posto  43.6 [41.1;45.8] (n  56.1)  raio  74.9 [70.0;80.1] px  arranjo16 +0.236 [+0.206;+0.264]
+   vit_s16     dtd @512               posto  44.4 [41.8;46.8] (n  57.3)  raio 181.3 [173.5;188.1] px  arranjo16 +0.631 [+0.579;+0.680]
+-> resolucao gravado
+  -- pet --
+   vit_b16     pet @224               posto  29.3 [26.5;31.8] (n  34.4)  raio  88.5 [83.4;92.0] px  arranjo16 +0.280 [+0.256;+0.302]
+   vit_b16     pet @384               posto  34.0 [31.6;36.6] (n  41.2)  raio 153.2 [145.6;159.1] px  arranjo16 +0.377 [+0.344;+0.406]
+   vit_b16     pet @512               posto  37.9 [35.2;40.4] (n  47.0)  raio 203.5 [195.5;210.6] px  arranjo16 +0.953 [+0.931;+0.977]
+   vit_s16     pet @224               posto  28.4 [25.4;31.5] (n  33.2)  raio  84.1 [77.8;89.5] px  arranjo16 +0.231 [+0.212;+0.250]
+   vit_s16     pet @512               posto  30.6 [27.5;33.6] (n  36.3)  raio 189.4 [178.8;200.5] px  arranjo16 +1.067 [+1.046;+1.089]
+-> resolucao gravado
+  -- sun397 --
+   vit_b16     sun397 @224            posto  21.9 [19.3;24.3] (n  24.5)  raio  89.1 [85.7;91.8] px  arranjo16 +0.316 [+0.281;+0.350]
+   vit_b16     sun397 @384            posto  24.1 [21.1;26.6] (n  27.2)  raio 154.6 [148.7;159.3] px  arranjo16 +0.380 [+0.343;+0.418]
+   vit_b16     sun397 @512            posto  25.5 [23.1;28.0] (n  29.1)  raio 207.3 [201.8;212.7] px  arranjo16 +0.966 [+0.939;+0.996]
+   vit_s16     sun397 @224            posto  22.4 [19.9;25.4] (n  25.2)  raio  88.8 [84.5;92.1] px  arranjo16 +0.390 [+0.361;+0.421]
+   vit_s16     sun397 @512            posto  20.6 [18.1;23.3] (n  22.9)  raio 197.3 [188.2;204.1] px  arranjo16 +0.997 [+0.969;+1.023]
+-> resolucao gravado
+
+== 3. CONTROLE DE FUNDO ==
+   fracao media de primeiro plano na mamografia: 0.341
+  -- dtd com mascara de mamografia --
+   resnet50    dtd mascarado          posto  30.6 [27.7;33.5] (n  36.9)  raio  77.2 [73.6;80.2] px  arranjo16 +0.553 [+0.519;+0.587]
+   maxvit_t    dtd mascarado          posto  14.1 [11.7;16.9] (n  15.1)  raio 116.7 [111.5;122.1] px  arranjo16 +0.151 [+0.125;+0.179]
+   vit_b16     dtd mascarado          posto  36.5 [34.1;39.2] (n  45.6)  raio 195.1 [185.3;204.0] px  arranjo16 +0.537 [+0.515;+0.566]
+-> fundo gravado
+  -- pet com mascara de mamografia --
+   resnet50    pet mascarado          posto  25.1 [23.1;27.4] (n  29.0)  raio  69.7 [67.4;71.7] px  arranjo16 +0.767 [+0.738;+0.799]
+   maxvit_t    pet mascarado          posto  16.3 [14.4;18.5] (n  17.8)  raio 126.7 [119.6;133.8] px  arranjo16 +0.107 [+0.081;+0.134]
+   vit_b16     pet mascarado          posto  30.0 [27.1;32.8] (n  36.0)  raio 193.2 [186.1;200.8] px  arranjo16 +0.687 [+0.668;+0.709]
+-> fundo gravado
+  -- sun397 com mascara de mamografia --
+   resnet50    sun397 mascarado       posto  22.2 [19.7;24.9] (n  25.1)  raio  72.1 [69.6;74.0] px  arranjo16 +0.690 [+0.658;+0.722]
+   maxvit_t    sun397 mascarado       posto  15.9 [13.9;18.1] (n  17.3)  raio 130.8 [124.9;136.5] px  arranjo16 +0.217 [+0.191;+0.245]
+   vit_b16     sun397 mascarado       posto  26.9 [24.4;29.6] (n  31.4)  raio 191.1 [182.5;201.8] px  arranjo16 +0.682 [+0.660;+0.704]
+-> fundo gravado
+
+== 4. TRES ARQUITETURAS DE CONTROLE ==
+  -- mamografia --
+   convnext_t  mamografia             posto  11.2 [9.9;12.7] (n  11.8)  raio  90.3 [87.2;93.5] px  arranjo16 +0.352 [+0.337;+0.368]
+   swin_t      mamografia             posto  11.5 [10.6;12.4] (n  12.1)  raio 162.0 [157.1;166.7] px  arranjo16 +0.856 [+0.838;+0.879]
+   vit_s16     mamografia             posto   8.4 [7.5;9.4] (n   8.8)  raio 166.9 [158.0;174.6] px  arranjo16 +0.991 [+0.983;+1.002]
+-> arquiteturas gravado
+  -- dtd --
+   convnext_t  dtd                    posto  32.9 [30.2;36.1] (n  40.6)  raio 102.3 [97.4;107.5] px  arranjo16 +0.272 [+0.233;+0.308]
+   swin_t      dtd                    posto  41.6 [38.8;44.0] (n  53.9)  raio 123.7 [117.0;129.3] px  arranjo16 +0.339 [+0.304;+0.378]
+   vit_s16     dtd                    posto  44.4 [41.8;46.8] (n  57.3)  raio 181.3 [173.5;188.1] px  arranjo16 +0.631 [+0.579;+0.680]
+-> arquiteturas gravado
+  -- pet --
+   convnext_t  pet                    posto  27.4 [24.9;29.9] (n  32.5)  raio 108.9 [103.4;114.2] px  arranjo16 +0.540 [+0.507;+0.574]
+   swin_t      pet                    posto  27.2 [24.9;29.5] (n  31.7)  raio 146.1 [137.9;153.6] px  arranjo16 +0.901 [+0.863;+0.945]
+   vit_s16     pet                    posto  30.6 [27.5;33.6] (n  36.3)  raio 189.4 [178.8;200.5] px  arranjo16 +1.067 [+1.046;+1.089]
+-> arquiteturas gravado
+  -- sun397 --
+   convnext_t  sun397                 posto  21.8 [19.9;24.0] (n  24.7)  raio 108.1 [101.7;113.9] px  arranjo16 +0.547 [+0.500;+0.589]
+   swin_t      sun397                 posto  23.4 [21.1;25.7] (n  26.5)  raio 153.7 [146.7;161.9] px  arranjo16 +0.622 [+0.591;+0.660]
+   vit_s16     sun397                 posto  20.6 [18.1;23.3] (n  22.9)  raio 197.3 [188.2;204.1] px  arranjo16 +0.997 [+0.969;+1.023]
+-> arquiteturas gravado
+
+== 5. ABLACAO DA ATENCAO EM GRADE DO MAXVIT ==
+   (atencao em grade removida de 11 blocos)
+  -- mamografia --
+   maxvit_t    mamografia sem grade   posto  11.8 [10.9;12.6] (n  12.5)  raio 111.1 [105.6;115.8] px  arranjo16 +0.190 [+0.175;+0.207]
+-> ablacao gravado
+  -- dtd --
+   maxvit_t    dtd sem grade          posto  12.4 [10.0;15.6] (n  13.0)  raio 123.9 [118.0;131.7] px  arranjo16 +0.140 [+0.111;+0.172]
+-> ablacao gravado
+  -- pet --
+   maxvit_t    pet sem grade          posto  15.5 [13.7;17.4] (n  16.8)  raio 147.4 [138.8;154.5] px  arranjo16 +0.244 [+0.220;+0.275]
+-> ablacao gravado
+  -- sun397 --
+   maxvit_t    sun397 sem grade       posto  11.6 [10.1;13.2] (n  12.2)  raio 157.6 [150.7;163.4] px  arranjo16 +0.253 [+0.220;+0.288]
+-> ablacao gravado
+
+concluido

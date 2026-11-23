@@ -1,0 +1,19 @@
+# ---------------------------------------------------------------------------
+# DADOS DE IMAGEM -- NUNCA VERSIONAR
+# ---------------------------------------------------------------------------
+# data/amostras/mamografia contem imagens do INbreast, que so pode ser obtido
+# mediante cadastro junto aos autores do banco e nao pode ser redistribuido.
+# Os demais bancos (DTD, Pet, SUN397) tem licenca propria e tambem nao sao
+# redistribuidos aqui. Use codigo/baixa_bancos.py para reconstruir a amostra.
+data/
+
+# Vetores de caracteristicas (39 MB). 17 deles derivam das mamografias, e
+# embeddings de imagem medica sao dado derivado de paciente identificavel.
+resultados/pr_vetores/
+
+# ---------------------------------------------------------------------------
+# Artefatos
+# ---------------------------------------------------------------------------
+__pycache__/
+*.pyc
+artigo/artigo-esann.zip
