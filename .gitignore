@@ -1,19 +1,19 @@
 # ---------------------------------------------------------------------------
 # IMAGE DATA -- NEVER COMMIT
 # ---------------------------------------------------------------------------
-# data/amostras/mamografia holds INbreast images, which are only available
+# data/samples/mammography holds INbreast images, which are only available
 # after registering with the dataset authors and may not be redistributed.
 # The other datasets (DTD, Pet, SUN397) have their own licences and are not
-# redistributed here either. Use codigo/baixa_bancos.py to rebuild the sample.
+# redistributed here either. Use code/download_datasets.py to rebuild the
+# sample.
 data/
 
 # Feature vectors (39 MB). Seventeen of them derive from the mammograms, and
 # embeddings of medical images are data derived from identifiable patients.
-resultados/pr_vetores/
+results/pr_vectors/
 
 # ---------------------------------------------------------------------------
 # Build artefacts
 # ---------------------------------------------------------------------------
 __pycache__/
 *.pyc
-artigo/artigo-esann.zip

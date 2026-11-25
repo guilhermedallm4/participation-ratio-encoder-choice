@@ -1,0 +1,366 @@
+{
+ "dtd": {
+  "resnet50": {
+   "mechanism": "pure convolution",
+   "reach": "local, hierarchical",
+   "channels": 2048,
+   "map": 16,
+   "participation_ratio": 39.88833244974738,
+   "rank_fraction": 0.019476724828978213,
+   "spatial_dispersion": 0.8052009445729673,
+   "band": {
+    "very_low": 1.2830098867416382,
+    "low": 1.2028018236160278,
+    "mean": 1.1624852418899536,
+    "high": 1.2368849515914917
+   }
+  },
+  "maxvit_t": {
+   "mechanism": "conv + neighbourhood and grid attention",
+   "reach": "local and global, hierarchical",
+   "channels": 512,
+   "map": 16,
+   "participation_ratio": 13.039893002402346,
+   "rank_fraction": 0.025468541020317082,
+   "spatial_dispersion": 0.866918200640894,
+   "band": {
+    "very_low": 1.0139726400375366,
+    "low": 1.0005334615707397,
+    "mean": 1.0255333185195923,
+    "high": 1.0160170793533325
+   }
+  },
+  "vit_b16": {
+   "mechanism": "pure global attention",
+   "reach": "global, flat",
+   "channels": 768,
+   "map": 32,
+   "participation_ratio": 53.30732610566928,
+   "rank_fraction": 0.06941058086675687,
+   "spatial_dispersion": 0.4992343627943965,
+   "band": {
+    "very_low": 1.1732608079910278,
+    "low": 1.157450795173645,
+    "mean": 1.182977318763733,
+    "high": 1.2250670194625854
+   }
+  },
+  "cka": {
+   "resnet50": {
+    "resnet50": 0.9999999999999999,
+    "maxvit_t": 0.3135319618151052,
+    "vit_b16": 0.62702968532714
+   },
+   "maxvit_t": {
+    "resnet50": 0.3135319618151052,
+    "maxvit_t": 1.0,
+    "vit_b16": 0.34776351377911374
+   },
+   "vit_b16": {
+    "resnet50": 0.62702968532714,
+    "maxvit_t": 0.34776351377911385,
+    "vit_b16": 1.0
+   }
+  },
+  "flow": {
+   "resnet50|residual conv": {
+    "branch": 1.6764,
+    "flow": 0.6083,
+    "cka_preserves": 0.9738
+   },
+   "maxvit_t|7x7 window attention": {
+    "branch": 0.3627,
+    "flow": 0.3627,
+    "cka_preserves": 0.9691
+   },
+   "maxvit_t|grid attention": {
+    "branch": 0.4233,
+    "flow": 0.4233,
+    "cka_preserves": 0.9811
+   },
+   "maxvit_t|conv (MBConv)": {
+    "branch": 0.3296,
+    "flow": 0.3296,
+    "cka_preserves": 0.9789
+   },
+   "vit_b16|global attention + MLP": {
+    "branch": 0.8118,
+    "flow": 0.8118,
+    "cka_preserves": 0.87
+   }
+  }
+ },
+ "pet": {
+  "resnet50": {
+   "mechanism": "pure convolution",
+   "reach": "local, hierarchical",
+   "channels": 2048,
+   "map": 16,
+   "participation_ratio": 40.23132191736956,
+   "rank_fraction": 0.019644200154965607,
+   "spatial_dispersion": 0.9400823883546093,
+   "band": {
+    "very_low": 1.4514929056167603,
+    "low": 1.3361643552780151,
+    "mean": 1.3065961599349976,
+    "high": 1.339437484741211
+   }
+  },
+  "maxvit_t": {
+   "mechanism": "conv + neighbourhood and grid attention",
+   "reach": "local and global, hierarchical",
+   "channels": 512,
+   "map": 16,
+   "participation_ratio": 16.81284350214874,
+   "rank_fraction": 0.03283758496513426,
+   "spatial_dispersion": 0.8639674516387894,
+   "band": {
+    "very_low": 0.8634465336799622,
+    "low": 1.039353847503662,
+    "mean": 1.0458613634109497,
+    "high": 1.0052303075790405
+   }
+  },
+  "vit_b16": {
+   "mechanism": "pure global attention",
+   "reach": "global, flat",
+   "channels": 768,
+   "map": 32,
+   "participation_ratio": 46.967787255806556,
+   "rank_fraction": 0.06115597298933145,
+   "spatial_dispersion": 0.5725182465033075,
+   "band": {
+    "very_low": 1.2554682493209839,
+    "low": 1.2760015726089478,
+    "mean": 1.278862476348877,
+    "high": 1.2996420860290527
+   }
+  },
+  "cka": {
+   "resnet50": {
+    "resnet50": 1.0,
+    "maxvit_t": 0.49098485532408653,
+    "vit_b16": 0.6670893513735658
+   },
+   "maxvit_t": {
+    "resnet50": 0.49098485532408653,
+    "maxvit_t": 1.0000000000000002,
+    "vit_b16": 0.5937317419236866
+   },
+   "vit_b16": {
+    "resnet50": 0.6670893513735657,
+    "maxvit_t": 0.5937317419236867,
+    "vit_b16": 1.0
+   }
+  },
+  "flow": {
+   "resnet50|residual conv": {
+    "branch": 1.7016,
+    "flow": 0.6218,
+    "cka_preserves": 0.969
+   },
+   "maxvit_t|7x7 window attention": {
+    "branch": 0.3599,
+    "flow": 0.3599,
+    "cka_preserves": 0.972
+   },
+   "maxvit_t|grid attention": {
+    "branch": 0.4063,
+    "flow": 0.4063,
+    "cka_preserves": 0.9778
+   },
+   "maxvit_t|conv (MBConv)": {
+    "branch": 0.3332,
+    "flow": 0.3332,
+    "cka_preserves": 0.9846
+   },
+   "vit_b16|global attention + MLP": {
+    "branch": 0.8206,
+    "flow": 0.8206,
+    "cka_preserves": 0.8672
+   }
+  }
+ },
+ "sun397": {
+  "resnet50": {
+   "mechanism": "pure convolution",
+   "reach": "local, hierarchical",
+   "channels": 2048,
+   "map": 16,
+   "participation_ratio": 22.67155392302309,
+   "rank_fraction": 0.011070094688976118,
+   "spatial_dispersion": 0.9340463090892817,
+   "band": {
+    "very_low": 1.3391022682189941,
+    "low": 1.2662369012832642,
+    "mean": 1.2202366590499878,
+    "high": 1.2303088903427124
+   }
+  },
+  "maxvit_t": {
+   "mechanism": "conv + neighbourhood and grid attention",
+   "reach": "local and global, hierarchical",
+   "channels": 512,
+   "map": 16,
+   "participation_ratio": 12.198057214165834,
+   "rank_fraction": 0.023824330496417644,
+   "spatial_dispersion": 0.8758267286083803,
+   "band": {
+    "very_low": 1.0848087072372437,
+    "low": 1.1151682138442993,
+    "mean": 1.118275761604309,
+    "high": 1.0800881385803223
+   }
+  },
+  "vit_b16": {
+   "mechanism": "pure global attention",
+   "reach": "global, flat",
+   "channels": 768,
+   "map": 32,
+   "participation_ratio": 29.139151855815456,
+   "rank_fraction": 0.037941603978926375,
+   "spatial_dispersion": 0.5541091113368897,
+   "band": {
+    "very_low": 1.2467533349990845,
+    "low": 1.275730013847351,
+    "mean": 1.2701632976531982,
+    "high": 1.2860347032546997
+   }
+  },
+  "cka": {
+   "resnet50": {
+    "resnet50": 1.0,
+    "maxvit_t": 0.42838313941857725,
+    "vit_b16": 0.7518466060735415
+   },
+   "maxvit_t": {
+    "resnet50": 0.42838313941857725,
+    "maxvit_t": 0.9999999999999998,
+    "vit_b16": 0.525847962956132
+   },
+   "vit_b16": {
+    "resnet50": 0.7518466060735414,
+    "maxvit_t": 0.525847962956132,
+    "vit_b16": 0.9999999999999999
+   }
+  },
+  "flow": {
+   "resnet50|residual conv": {
+    "branch": 1.6234,
+    "flow": 0.6023,
+    "cka_preserves": 0.9733
+   },
+   "maxvit_t|7x7 window attention": {
+    "branch": 0.3556,
+    "flow": 0.3556,
+    "cka_preserves": 0.9695
+   },
+   "maxvit_t|grid attention": {
+    "branch": 0.4089,
+    "flow": 0.4089,
+    "cka_preserves": 0.9811
+   },
+   "maxvit_t|conv (MBConv)": {
+    "branch": 0.3389,
+    "flow": 0.3389,
+    "cka_preserves": 0.9849
+   },
+   "vit_b16|global attention + MLP": {
+    "branch": 0.8115,
+    "flow": 0.8115,
+    "cka_preserves": 0.8709
+   }
+  }
+ },
+ "mammography": {
+  "resnet50": {
+   "mechanism": "pure convolution",
+   "reach": "local, hierarchical",
+   "channels": 2048,
+   "map": 16,
+   "participation_ratio": 11.699019234508695,
+   "rank_fraction": 0.005712411735599949,
+   "spatial_dispersion": 0.9838222443049868,
+   "band": {
+    "very_low": 1.2311137914657593,
+    "low": 1.2722041606903076,
+    "mean": 1.2428122758865356,
+    "high": 1.2029591798782349
+   }
+  },
+  "maxvit_t": {
+   "mechanism": "conv + neighbourhood and grid attention",
+   "reach": "local and global, hierarchical",
+   "channels": 512,
+   "map": 16,
+   "participation_ratio": 12.492055292039394,
+   "rank_fraction": 0.02439854549226444,
+   "spatial_dispersion": 0.9585527554340855,
+   "band": {
+    "very_low": 0.984122097492218,
+    "low": 0.997636616230011,
+    "mean": 1.002030372619629,
+    "high": 0.9587276577949524
+   }
+  },
+  "vit_b16": {
+   "mechanism": "pure global attention",
+   "reach": "global, flat",
+   "channels": 768,
+   "map": 32,
+   "participation_ratio": 12.89783909433988,
+   "rank_fraction": 0.01679406132075505,
+   "spatial_dispersion": 0.8004617471312637,
+   "band": {
+    "very_low": 1.1222031116485596,
+    "low": 1.0259288549423218,
+    "mean": 0.981451690196991,
+    "high": 1.0482877492904663
+   }
+  },
+  "cka": {
+   "resnet50": {
+    "resnet50": 1.0,
+    "maxvit_t": 0.6430092454306897,
+    "vit_b16": 0.6913424067376193
+   },
+   "maxvit_t": {
+    "resnet50": 0.6430092454306898,
+    "maxvit_t": 1.0,
+    "vit_b16": 0.6462608129673805
+   },
+   "vit_b16": {
+    "resnet50": 0.6913424067376192,
+    "maxvit_t": 0.6462608129673806,
+    "vit_b16": 1.0
+   }
+  },
+  "flow": {
+   "resnet50|residual conv": {
+    "branch": 1.6683,
+    "flow": 0.629,
+    "cka_preserves": 0.9824
+   },
+   "maxvit_t|7x7 window attention": {
+    "branch": 0.3773,
+    "flow": 0.3773,
+    "cka_preserves": 0.9841
+   },
+   "maxvit_t|grid attention": {
+    "branch": 0.4405,
+    "flow": 0.4405,
+    "cka_preserves": 0.9838
+   },
+   "maxvit_t|conv (MBConv)": {
+    "branch": 0.2926,
+    "flow": 0.2926,
+    "cka_preserves": 0.9969
+   },
+   "vit_b16|global attention + MLP": {
+    "branch": 0.8146,
+    "flow": 0.8146,
+    "cka_preserves": 0.9145
+   }
+  }
+ }
+}
